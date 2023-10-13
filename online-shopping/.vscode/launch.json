@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Authenticator",
+            "request": "launch",
+            "mainClass": "loginPage.Authenticator",
+            "projectName": "online-shopping_cbd7c9cf"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Authenticator",
+            "request": "launch",
+            "mainClass": "/src/loginPage.Authenticator",
+            "projectName": "online-shopping_cbd7c9cf",
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/mssql-jdbc-12.4.1.jre11.jar"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "loginPage.Main",
+            "projectName": "online-shopping_cbd7c9cf"
+        }
+    ]
+}
