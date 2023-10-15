@@ -1,12 +1,11 @@
-package loginPage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Main {
-
+public class LoginPage {
+    
     public static void main(String[] args) {
         var frame = new JFrame("Login");
         var panel = new JPanel();
@@ -42,12 +41,12 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 String userName = userNameField.getText();
                 String password = passwordField.getText();
-                System.out.println("User name: " + userName);
-                System.out.println("Password: " + password);
                 var authenticated = Authenticator.authenticate(userName, password);
                 if (authenticated) {
                     JOptionPane.showMessageDialog(frame, "Login Successful");
-                    frame.remove(panel);
+                    var userData = UserProfile.getUserData(userName);
+                    frame.setVisible(false);
+                    UserProfilePage.userProfilePage(userData);
                 } else {
                     JOptionPane.showMessageDialog(frame, "Login Failed");
                 }
