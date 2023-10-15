@@ -17,28 +17,39 @@ public class ProductsPage {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Product");
-
-            // Create GUI
             frame = new JFrame("Products");
             panel = new JPanel();
             panel.setLayout(new GridLayout(0, 4));
             int n = 6;
-            // Add products to panel
             while (n > 0 && rs.next()) {
-                // add button to each product with their product_id for later use
+                var productCard = new JPanel(new GridLayout(5, 1));
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
-                JLabel imageLabel = new JLabel(icon);
-
-                JLabel nameLabel = new JLabel(rs.getString("product_name"));
-
-                JLabel priceLabel = new JLabel(rs.getString("price"));
-                // make the description to be wrapped in a new line
-                JLabel descriptionLabel = new JLabel("<html><p>" + rs.getString("product_description") + "</p></html>");
-
-                panel.add(imageLabel);
-                panel.add(nameLabel);
-                panel.add(priceLabel);
-                panel.add(descriptionLabel);
+                var imageLabel = new JLabel(icon);
+                int height = icon.getIconHeight();
+                imageLabel.setPreferredSize(new Dimension(100, height));
+                var productButton = new JButton("Add to Cart");
+                productButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Add the product to the cart
+                        try {
+                            addToCart(rs.getInt("product_id"), url);
+                        } catch (SQLException exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                });
+                var nameLabel = new JLabel(rs.getString("product_name"));
+                var priceLabel = new JLabel(rs.getString("price"));
+                var descriptionLabel = new JLabel(
+                        "<html><p style='font-size: 12px; font-weight: bold;'>" + rs.getString("product_description")
+                                + "</p></html>");
+                productCard.add(imageLabel);
+                productCard.add(nameLabel);
+                productCard.add(priceLabel);
+                productCard.add(descriptionLabel);
+                productCard.add(productButton);
+                panel.add(productCard);
                 n--;
             }
             // Add panel to frame
@@ -47,8 +58,27 @@ public class ProductsPage {
             e.printStackTrace();
         }
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1400, 1700);
+        frame.setSize(1400, 700);
         frame.setVisible(true);
+    }
+
+    public void addToCart(int productId, String url) {
+        try {
+            // Create database connection
+            Connection conn = DriverManager.getConnection(url);
+
+            // Call stored procedure to add product to cart
+            CallableStatement stmt = conn.prepareCall("{CALL AddCartItem(?, ?, ?, ?, ?)}");
+            stmt.setInt(1, 1);
+            stmt.setInt(2, productId);
+            stmt.setInt(3, 1);
+            stmt.setInt(4, 1);
+            stmt.setInt(5, 1);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
