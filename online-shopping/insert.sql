@@ -1,3 +1,4 @@
+USE Online_shopping;
 INSERT INTO
   Customer (
     customer_id,
@@ -17,6 +18,6 @@ VALUES
     'Awoke',
     18,
     'hunderaweke@gmail.com',
-    '123-456-7890',
+    HASHBYTES('SHA2_256','1234'),
     '0955969362'
   );
