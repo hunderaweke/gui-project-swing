@@ -19,10 +19,10 @@ public class ProductsPage {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Product");
             frame = new JFrame("Products");
             panel = new JPanel();
-            panel.setLayout(new GridLayout(0, 4));
-            int n = 6;
+            panel.setLayout(new GridLayout(0, 7, 20, 0));
+            int n = 7;
             while (n > 0 && rs.next()) {
-                var productCard = new JPanel(new GridLayout(5, 1));
+                var productCard = new JPanel(new GridLayout(5, 1, 0, 2));
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();
@@ -39,16 +39,19 @@ public class ProductsPage {
                         }
                     }
                 });
+                var secondaryPanel = new JPanel();
                 var nameLabel = new JLabel(rs.getString("product_name"));
-                var priceLabel = new JLabel(rs.getString("price"));
+                var priceLabel = new JLabel("<html><h1 style=' color: rgb(19, 126, 217); font-weight: bold;'>"
+                        + rs.getString("price") + "</h1></html>");
                 var descriptionLabel = new JLabel(
-                        "<html><p style='font-size: 12px; font-weight: bold;'>" + rs.getString("product_description")
+                    "<html><p style='font-size: 12px; font-weight: bold;'>" + rs.getString("product_description")
                                 + "</p></html>");
+                secondaryPanel.add(nameLabel);
+                secondaryPanel.add(priceLabel);
+                secondaryPanel.add(productButton);
                 productCard.add(imageLabel);
-                productCard.add(nameLabel);
-                productCard.add(priceLabel);
                 productCard.add(descriptionLabel);
-                productCard.add(productButton);
+                productCard.add(secondaryPanel);
                 panel.add(productCard);
                 n--;
             }
