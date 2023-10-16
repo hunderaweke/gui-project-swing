@@ -1,3 +1,4 @@
+package stg;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,9 +44,9 @@ public class SignupPage extends JFrame {
                 String password = new String(passwordField.getPassword());
 
                 // Establish database connection
-                try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://your-server:1433;databaseName=your-database", "your-username", "your-password")) {
+                try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;")) {
                     // Prepare SQL statement
-                    String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+                    String sql = "INSERT INTO Customers (username, email, password) VALUES (?, ?, ?)";
                     try (PreparedStatement statement = connection.prepareStatement(sql)) {
                         statement.setString(1, username);
                         statement.setString(2, email);

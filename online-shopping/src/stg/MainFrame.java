@@ -1,7 +1,11 @@
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 
 public class MainFrame extends JFrame {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,6 +41,9 @@ public class MainFrame extends JFrame {
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Products</h2></html>");
         var cartButton = new Buttons(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Cart</h2></html>");
+        var PaymentPanel = new Buttons(
+                "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>payment panal</h2></html>");
+
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));

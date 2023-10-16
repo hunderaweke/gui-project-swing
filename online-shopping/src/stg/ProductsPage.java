@@ -1,3 +1,4 @@
+package stg;
 import java.sql.*;
 import javax.swing.*;
 import java.awt.*;
