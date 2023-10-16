@@ -5,11 +5,8 @@ import java.awt.event.*;
 import java.net.URL;
 
 public class ProductsPage {
-
-    JFrame frame;
-    JPanel panel;
-
-    public ProductsPage() {
+    public static JPanel productsPage() {
+        JPanel panel = new JPanel();
 
         // Database connection code
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
@@ -17,10 +14,9 @@ public class ProductsPage {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Product");
-            frame = new JFrame("Products");
             panel = new JPanel();
-            panel.setLayout(new GridLayout(0, 7, 20, 0));
-            int n = 7;
+            panel.setLayout(new GridLayout(0, 4, 20, 0));
+            int n = 4;
             while (n > 0 && rs.next()) {
                 var productCard = new JPanel(new GridLayout(5, 1, 0, 2));
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
@@ -40,7 +36,7 @@ public class ProductsPage {
                     }
                 });
                 var secondaryPanel = new JPanel();
-                var nameLabel = new JLabel(rs.getString("product_name"));
+                var nameLabel = new JLabel("<html><h1>"+rs.getString("product_name")+"</h1></html>");
                 var priceLabel = new JLabel("<html><h1 style=' color: rgb(19, 126, 217); font-weight: bold;'>"
                         + rs.getString("price") + "</h1></html>");
                 var descriptionLabel = new JLabel(
@@ -56,16 +52,13 @@ public class ProductsPage {
                 n--;
             }
             // Add panel to frame
-            frame.add(panel);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1400, 700);
-        frame.setVisible(true);
+        return panel;
     }
 
-    public void addToCart(int productId, String url) {
+    public static void addToCart(int productId, String url) {
         try {
             // Create database connection
             Connection conn = DriverManager.getConnection(url);
@@ -82,10 +75,6 @@ public class ProductsPage {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new ProductsPage();
     }
 
 }

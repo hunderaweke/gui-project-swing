@@ -5,7 +5,7 @@ import javax.swing.*;
 public class LoginPage {
 
     public static void main(String[] args) {
-        var frame = new JFrame("Login");
+        var frame = new JFrame("Online Shopping");
         var panel = new JPanel();
         var userNameField = new JTextField(10);
         userNameField.setBackground(new Color(192, 192, 192));
@@ -51,6 +51,7 @@ public class LoginPage {
         panel.setBackground(new Color(19, 126, 217));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
         // Add hover effect to the button and text fields
