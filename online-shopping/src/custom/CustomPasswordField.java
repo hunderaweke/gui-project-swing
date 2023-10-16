@@ -12,7 +12,7 @@ public class CustomPasswordField extends JPasswordField {
     setForeground(Color.black);
     try {
       Font font;
-      InputStream fontStream = new FileInputStream("online-shopping/src/fonts/Supreme-Regular.otf");
+      InputStream fontStream = new FileInputStream("src/fonts/Supreme-Regular.otf");
       font = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(16f);
       font = font.deriveFont(Font.BOLD);
       setFont(font);

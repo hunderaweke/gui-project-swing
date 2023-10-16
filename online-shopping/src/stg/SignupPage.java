@@ -9,16 +9,12 @@ import stg.LoginPage.ButtonHoverEffect;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.EventObject;
-=======
-import java.sql.*;
->>>>>>> 1974a8e283ce6bee22f93e60379be6ac68ea1032
 
 public class SignupPage extends JFrame {
     public JTextField usernameField;
