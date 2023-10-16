@@ -9,12 +9,12 @@ public class MainFrame extends JFrame {
     JPanel mainPanel = new JPanel();
     JPanel navigationPanel = new JPanel();
 
-    MainFrame(String title) {
+    MainFrame(String title, String userName) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout(0, 0));
         navigationPanelContent();
-        sidePanelContent();
+        sidePanelContent(userName);
         mainPanel.setBackground(Color.WHITE);
         this.add(mainPanel, BorderLayout.CENTER);
         this.pack();
@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
         this.add(navigationPanel, BorderLayout.PAGE_START);
     }
 
-    void sidePanelContent() {
+    void sidePanelContent(String userName) {
         var userProfileButton = new JButton(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>User Profile</h2></html>");
         var productsButton = new JButton(
@@ -43,26 +43,26 @@ public class MainFrame extends JFrame {
         userProfileButton.setBackground(new Color(19, 180, 217));
         productsButton.setBackground(new Color(19, 180, 217));
         var productPage = new ProductsPage();
-        mainPanel.add(productPage);
-        productPage.setVisible(false);
-        var userData = UserProfile.getUserData("hundera");
-        mainPanel.add(new UserProfilePage(userData));
-
+        new UserProfile();
+        var userProfile = UserProfile.getUserData(userName);
+        mainPanel.add(new UserProfilePage(userProfile));
         // add hover effect for the buttons
         userProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.removeAll();
-                mainPanel.add(new UserProfilePage(userData));
-                mainPanel.revalidate();
-                mainPanel.repaint();
+                mainPanel.setVisible(false);
+                mainPanel.add(new UserProfilePage(UserProfile.getUserData("hundera")));
                 mainPanel.setVisible(true);
             }
         });
         productsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mainPanel.removeAll();
+                mainPanel.setVisible(false);
+                mainPanel.add(productPage);
+                mainPanel.setVisible(true);
             }
         });
         sidePanel.add(userProfileButton);
@@ -70,7 +70,4 @@ public class MainFrame extends JFrame {
         this.add(sidePanel, BorderLayout.LINE_START);
     }
 
-    public static void main(String[] args) {
-        new MainFrame("Online Shopping");
-    }
 }

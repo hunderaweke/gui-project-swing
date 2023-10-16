@@ -32,8 +32,7 @@ public class LoginPage {
         userNameField.setPreferredSize(new Dimension(200, 30));
         userNameField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.BLACK),
-                BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
+                BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         gbc.gridy = 2;
         panel.add(passwordLabel, gbc);
         gbc.gridy = 3;
@@ -41,8 +40,7 @@ public class LoginPage {
         passwordField.setPreferredSize(new Dimension(200, 30));
         passwordField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.BLACK),
-                BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
+                BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 0, 0, 0); // Add top margin to the button
@@ -67,9 +65,8 @@ public class LoginPage {
                 var authenticated = Authenticator.authenticate(userName, password);
                 if (authenticated) {
                     JOptionPane.showMessageDialog(frame, "Login Successful");
-                    var userData = UserProfile.getUserData(userName);
                     frame.setVisible(false);
-                    UserProfilePage.userProfilePage(userData);
+                    new MainFrame("Online Shopping", userName);
                 } else {
                     JOptionPane.showMessageDialog(frame, "Login Failed");
                 }
@@ -85,7 +82,7 @@ public class LoginPage {
         public void mouseEntered(MouseEvent e) {
             JButton button = (JButton) e.getSource();
             originalBackground = button.getBackground();
-            button.setBackground(new Color(205,234,226));
+            button.setBackground(new Color(205, 234, 226));
         }
 
         @Override
