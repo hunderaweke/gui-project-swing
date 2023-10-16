@@ -35,8 +35,12 @@ public class MainFrame extends JFrame {
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>User Profile</h2></html>");
         var productsButton = new Buttons(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Products</h2></html>");
+        var cartButton = new Buttons(
+                "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Cart</h2></html>");
+
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
+        cartButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 5));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -63,8 +67,18 @@ public class MainFrame extends JFrame {
                 mainPanel.setVisible(true);
             }
         });
+        cartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.removeAll();
+                mainPanel.setVisible(false);
+                mainPanel.add(new CartItems());
+                mainPanel.setVisible(true);
+            }
+        });
         sidePanel.add(userProfileButton);
         sidePanel.add(productsButton);
+        sidePanel.add(cartButton);
         this.add(sidePanel, BorderLayout.LINE_START);
     }
 
