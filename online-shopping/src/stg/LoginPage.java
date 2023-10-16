@@ -44,7 +44,7 @@ public class LoginPage {
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(20, 0, 0, 0); // Add top margin to the button
+        gbc.insets = new Insets(20, 0, 0, 0);
         panel.add(button, gbc);
         frame.add(panel);
         panel.setBackground(new Color(19, 126, 217));
@@ -53,7 +53,7 @@ public class LoginPage {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
-        // Add hover effect to the button and text fields
+
         button.addMouseListener(new ButtonHoverEffect());
         userNameField.addMouseListener(new TextFieldHoverEffect());
         passwordField.addMouseListener(new TextFieldHoverEffect());

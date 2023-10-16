@@ -1,4 +1,4 @@
-
+package stg;
 import javax.swing.*;
 
 import java.awt.*;
