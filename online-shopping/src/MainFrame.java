@@ -12,10 +12,11 @@ public class MainFrame extends JFrame {
     MainFrame(String title) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout(5, 0));
+        this.setLayout(new BorderLayout(0, 0));
         navigationPanelContent();
         sidePanelContent();
-
+        mainPanel.setBackground(Color.WHITE);
+        this.add(mainPanel, BorderLayout.CENTER);
         this.pack();
         this.setVisible(true);
         this.setSize(screenSize.width, screenSize.height);
@@ -41,17 +42,27 @@ public class MainFrame extends JFrame {
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         userProfileButton.setBackground(new Color(19, 180, 217));
         productsButton.setBackground(new Color(19, 180, 217));
+        var productPage = new ProductsPage();
+        mainPanel.add(productPage);
+        productPage.setVisible(false);
+        var userData = UserProfile.getUserData("hundera");
+        mainPanel.add(new UserProfilePage(userData));
+
         // add hover effect for the buttons
         userProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new UserProfile();
+                mainPanel.removeAll();
+                mainPanel.add(new UserProfilePage(userData));
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                mainPanel.setVisible(true);
             }
         });
         productsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ProductsPage();
+
             }
         });
         sidePanel.add(userProfileButton);
