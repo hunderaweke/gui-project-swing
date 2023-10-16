@@ -1,8 +1,8 @@
 package stg;
 
-
 import java.security.MessageDigest;
 import java.sql.*;
+
 public class Authenticator {
     protected static boolean authenticate(String userName, String password) {
         try {

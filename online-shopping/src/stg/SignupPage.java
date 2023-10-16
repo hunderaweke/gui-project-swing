@@ -9,12 +9,16 @@ import stg.LoginPage.ButtonHoverEffect;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.EventObject;
+=======
+import java.sql.*;
+>>>>>>> 1974a8e283ce6bee22f93e60379be6ac68ea1032
 
 public class SignupPage extends JFrame {
     public JTextField usernameField;
@@ -93,7 +97,8 @@ public class SignupPage extends JFrame {
                 String lastName = lastNameField.getText();
                 String phoneNumber = phoneNumberField.getText();
                 // Establish database connection
-                try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;")) {
+                try (Connection connection = DriverManager.getConnection(
+                        "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;")) {
                     // Prepare SQL statement
                     String sql = "insert into Customer (first_name, last_name, email, phone_number, age, username, customer_password) values (?, ?, ?, ?, ?, ?,  HASHBYTES('SHA2_256', ?));";
                     try (PreparedStatement statement = connection.prepareStatement(sql)) {
