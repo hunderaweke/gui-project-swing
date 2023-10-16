@@ -1,6 +1,8 @@
 package stg;
 import java.sql.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -9,6 +11,7 @@ public class ProductsPage extends JPanel {
     ProductsPage() {
         // Database connection code
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
+        this.setPreferredSize(new Dimension(1250, 800));
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
@@ -16,7 +19,8 @@ public class ProductsPage extends JPanel {
             this.setLayout(new GridLayout(0, 4, 20, 0));
             int n = 4;
             while (n > 0 && rs.next()) {
-                var productCard = new JPanel(new GridLayout(5, 1, 0, 2));
+                var productCard = new JPanel(new GridLayout(3, 2, 4, 2));
+
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();
@@ -33,23 +37,49 @@ public class ProductsPage extends JPanel {
                         }
                     }
                 });
+
+                productButton.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        productButton.setBackground(new Color(19, 126, 217));
+                        productButton.setForeground(Color.WHITE);
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        productButton.setBackground(UIManager.getColor("Button.background"));
+                        productButton.setForeground(UIManager.getColor("Button.foreground"));
+                    }
+                });
+
                 var secondaryPanel = new JPanel();
-                var nameLabel = new JLabel("<html><h1>" + rs.getString("product_name") + "</h1></html>");
-                var priceLabel = new JLabel("<html><h1 style=' color: rgb(19, 126, 217); font-weight: bold;'>"
-                        + rs.getString("price") + "</h1></html>");
+                var nameLabel = new JLabel("<html><h2>" + rs.getString("product_name") + "</h2></html>");
+                var priceLabel = new JLabel(
+                        "<html><h1 style='font-size: 20px; color: rgb(19, 126, 217); font-weight: bold;'>"
+                                + rs.getString("price") + "</h1></html>");
                 var descriptionLabel = new JLabel(
-                        "<html><p style='font-size: 12px; font-weight: bold;'>" + rs.getString("product_description")
+                        "<html><p style='font-size: 12px; font-weight: light;'>" + rs.getString("product_description")
                                 + "</p></html>");
+                descriptionLabel.setPreferredSize(new Dimension(280, 50));
+                nameLabel.setPreferredSize(new Dimension(280, 50));
+                priceLabel.setPreferredSize(new Dimension(280, 60));
+                secondaryPanel.setBackground(Color.WHITE);
+                productCard.setBorder(new EmptyBorder(0, 10, 0, 10));
+                nameLabel.setBorder(new EmptyBorder(0, 7, 0, 7));
+                descriptionLabel.setBorder(new EmptyBorder(0, 7, 0, 7));
+
+                priceLabel.setBorder(new EmptyBorder(0, 7, 0, 7));
+
                 secondaryPanel.add(nameLabel);
+                secondaryPanel.add(descriptionLabel);
                 secondaryPanel.add(priceLabel);
                 secondaryPanel.add(productButton);
                 productCard.add(imageLabel);
-                productCard.add(descriptionLabel);
                 productCard.add(secondaryPanel);
+
                 this.add(productCard);
                 n--;
             }
-            // Add panel to frame
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,4 +104,11 @@ public class ProductsPage extends JPanel {
         }
     }
 
+    public static void main(String[] args) {
+        var frame = new JFrame("Online Shopping");
+        frame.setContentPane(new ProductsPage());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }
