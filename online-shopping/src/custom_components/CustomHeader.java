@@ -15,7 +15,7 @@ public class CustomHeader extends JLabel {
       InputStream fontStream = new FileInputStream("src/fonts/ClashGroteskNerdFont-Bold.otf");
       font = Font.createFont(Font.TRUETYPE_FONT, fontStream);
       GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
-      font = font.deriveFont(100f);
+      font = font.deriveFont(80f);
       setFont(font);
       fontStream.close();
     } catch (IOException e) {

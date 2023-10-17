@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.sql.*;
 
 public class Authenticator {
-    protected static boolean authenticate(String userName, String password) {
+    public static boolean authenticate(String userName, String password) {
         try {
             var connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;";
             var con = DriverManager.getConnection(connectionUrl);
@@ -18,14 +18,9 @@ public class Authenticator {
                 var md = MessageDigest.getInstance("SHA-256");
                 md.update(password.getBytes());
                 byte[] hashedPassword = md.digest();
-                System.out.println(hashedPassword);
-                System.out.println(passwordFromDB);
-
                 if (MessageDigest.isEqual(hashedPassword, passwordFromDB)) {
-                    System.out.println("Matched");
                     return true;
                 } else {
-                    System.out.println("Not Matched");
                     return false;
                 }
             } catch (Exception e) {

@@ -15,13 +15,14 @@ public class MainFrame extends JFrame {
     JPanel sidePanel = new JPanel();
     JPanel mainPanel = new JPanel();
     JPanel navigationPanel = new JPanel();
+    public String userName;
 
     MainFrame(String title, String userName) {
-        super(title);
+        this.userName = userName;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(0, 0));
         navigationPanelContent();
-        sidePanelContent(userName);
+        sidePanelContent(this.userName);
         mainPanel.setBackground(Color.WHITE);
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
         pack();
@@ -34,7 +35,7 @@ public class MainFrame extends JFrame {
         var heading = new CustomHeader("<html><h1 style='font-size:70rem;'>Online Shopping   </h1></html>");
         heading.setForeground(new Color(255, 255, 255));
         navigationPanel.setBackground(new Color(1, 73, 124));
-        navigationPanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height / 4));
+        navigationPanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height / 6));
         navigationPanel.setLayout(new GridBagLayout());
         var gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 40, 0, 0);
@@ -51,7 +52,7 @@ public class MainFrame extends JFrame {
                 "󰄐  Cart");
         var paymentButton = new SideBarButton(
                 "  Payment");
-        var shopIcon = new CustomHeader("        ");
+        var shopIcon = new CustomHeader.BigHeaders("  ");
         shopIcon.setForeground(new Color(255, 255, 255));
 
         var groupMember = new JPanel();
@@ -71,10 +72,8 @@ public class MainFrame extends JFrame {
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         var productPage = new ProductsPage();
-        new UserProfile();
-        var userProfile = UserProfile.getUserData(userName);
-        mainPanel.add(new UserProfilePage(userProfile));
-        // add hover effect for the buttons
+        // var userProfile = pages.UserProfile.getUserData(this.userName);
+        mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

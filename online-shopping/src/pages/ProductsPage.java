@@ -4,7 +4,6 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import custom_components.CustomButton;
 import custom_components.CustomCardButton;
 import custom_components.CustomProductPageLabel;
 
@@ -24,7 +23,7 @@ public class ProductsPage extends JPanel {
             this.setLayout(new GridLayout(0, 4, 10, 0));
             int n = 7;
             while (n > 0 && rs.next()) {
-                var productCard = new JPanel(new GridLayout(3, 2, 4, 2));
+                var productCard = new JPanel(new GridLayout(3, 2, 0, 2));
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();

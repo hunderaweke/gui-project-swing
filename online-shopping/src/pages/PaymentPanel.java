@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class PaymentPanel extends JPanel {
     private CustomInputField amountTextField;
-    private CustomInputField balanceTextField;
     private CustomInputField priceTextField;
     private CustomButton payButton;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

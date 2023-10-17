@@ -3,7 +3,6 @@ package pages;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import custom_components.CustomButton;
 import custom_components.CustomCardButton;
 import custom_components.CustomTable;
 
@@ -48,6 +47,7 @@ public class CartItems extends JPanel {
                     var quantity = cartResultSet.getString("quantity");
                     model.addRow(new Object[] { cartID, productResultSet.getString("product_name"),
                             productResultSet.getString("price"), quantity, cartResultSet.getString("is_active") });
+
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

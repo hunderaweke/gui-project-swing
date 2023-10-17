@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class UserProfile {
     public static String[] getUserData(String userName) {
-        // implement a funcation that gets the user data from the Customer table
         try {
             var connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
             var con = DriverManager.getConnection(connectionUrl);
