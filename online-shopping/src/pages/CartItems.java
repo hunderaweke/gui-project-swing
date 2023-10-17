@@ -3,7 +3,6 @@ package pages;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import custom.CustomButton;
 import custom.CustomCardButton;
 import custom.CustomTable;
 
