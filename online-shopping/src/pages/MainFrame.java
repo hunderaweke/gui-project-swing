@@ -80,7 +80,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 mainPanel.removeAll();
                 mainPanel.setVisible(false);
-                mainPanel.add(new CartItems());
+                mainPanel.add(new CartItems(), BorderLayout.CENTER);
                 mainPanel.setVisible(true);
             }
         });

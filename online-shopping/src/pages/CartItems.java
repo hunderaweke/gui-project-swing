@@ -12,12 +12,15 @@ import java.sql.*;
 public class CartItems extends JPanel {
     private JButton removeItemButton;
     String connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public CartItems() {
         setLayout(new BorderLayout());
-        try (Connection con = DriverManager.getConnection(this.connectionUrl)) {
+        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 250));
+        try (Connection con = DriverManager.getConnection(connectionUrl)) {
             // make a table for it pls
             var cartTable = new CustomTable();
+            cartTable.setPreferredSize(new Dimension(1000, 900));
             var model = new DefaultTableModel();
             model.setColumnIdentifiers(new Object[] { "Item", "Product", "Price", "Quantity", "State" });
             removeItemButton = new CustomButton("Remove Item");
