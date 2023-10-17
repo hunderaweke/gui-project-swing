@@ -16,7 +16,7 @@ public class CartItems extends JPanel {
             // make a table for it pls
             var cartTable = new JTable();
             var model = new DefaultTableModel();
-            model.setColumnIdentifiers(new Object[] { "Item", "Price" });
+            model.setColumnIdentifiers(new Object[] { "Item", "Price", "Quantity" });
 
             removeItemButton = new JButton("Remove Item");
             var getCartItemsQuery = "SELECT cart_id, product_id FROM Cart_Item;";
