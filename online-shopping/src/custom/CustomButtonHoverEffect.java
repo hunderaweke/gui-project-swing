@@ -19,6 +19,6 @@ public class CustomButtonHoverEffect extends MouseAdapter {
   public void mouseExited(MouseEvent e) {
     JButton button = (JButton) e.getSource();
     button.setBackground(originalBackground);
-    button.setForeground(Color.BLACK);
+    button.setForeground(Color.WHITE);
   }
 }
