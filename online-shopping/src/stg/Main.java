@@ -1,11 +1,10 @@
 package stg;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-
 
 public class Main extends JPanel {
 

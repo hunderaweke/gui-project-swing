@@ -2,23 +2,22 @@ package stg;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import javax.swing.*;
+
+import custom.CustomInputField;
+import custom.CustomPasswordField;
 
 public class LoginPage {
 
     public static void main(String[] args) {
         var frame = new JFrame("Online Shopping");
         var panel = new JPanel();
-        var userNameField = new CustomInputField(20);
+        var userNameField = new CustomInputField();
 
         // font supreme from fonts directoryFont font;\
-        var passwordField = new CustomPasswordField(20);
+        var passwordField = new CustomPasswordField();
         var userNameLabel = new JLabel("Enter Name: ");
         var passwordLabel = new JLabel("Enter Password");
-        passwordField.setBackground(new Color(192, 192, 192));
 
         var button = new JButton("Login");
         button.setBackground(new Color(143, 196, 212));
@@ -30,15 +29,10 @@ public class LoginPage {
         panel.add(userNameLabel, gbc);
         gbc.gridy = 1;
         panel.add(userNameField, gbc);
-        userNameField.setPreferredSize(new Dimension(200, 30));
         gbc.gridy = 2;
         panel.add(passwordLabel, gbc);
         gbc.gridy = 3;
         panel.add(passwordField, gbc);
-        passwordField.setPreferredSize(new Dimension(200, 30));
-        passwordField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.BLACK),
-                BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 0, 0, 0); // Add top margin to the button
