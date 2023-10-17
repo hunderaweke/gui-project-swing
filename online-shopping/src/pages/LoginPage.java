@@ -27,8 +27,10 @@ public class LoginPage {
         gbc.anchor = GridBagConstraints.WEST;
         panel.add(userNameLabel, gbc);
         gbc.gridy = 1;
+        gbc.insets = new Insets(10, 0, 0, 0);
         panel.add(userNameField, gbc);
         gbc.gridy = 2;
+        gbc.insets = new Insets(10, 0, 0, 0);
         panel.add(passwordLabel, gbc);
         gbc.gridy = 3;
         panel.add(passwordField, gbc);

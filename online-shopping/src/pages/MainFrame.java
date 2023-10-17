@@ -38,13 +38,13 @@ public class MainFrame extends JFrame {
 
     void sidePanelContent(String userName) {
         var userProfileButton = new SideBarButton(
-                "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>User Profile</h2></html>");
+                "User Profile");
         var productsButton = new SideBarButton(
-                "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Products</h2></html>");
+                "Products");
         var cartButton = new SideBarButton(
-                "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Cart</h2></html>");
+                "Cart");
         var PaymentPanel = new SideBarButton(
-                "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>payment panal</h2></html>");
+                "payment panal");
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
