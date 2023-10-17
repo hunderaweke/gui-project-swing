@@ -3,8 +3,8 @@ package pages;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import custom.CustomCardButton;
-import custom.CustomTable;
+import custom_components.CustomCardButton;
+import custom_components.CustomTable;
 
 import java.awt.*;
 import java.sql.*;
@@ -17,7 +17,7 @@ public class CartItems extends JPanel {
 
     public CartItems() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 250));
+        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 400));
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
             // make a table for it pls
             var cartTable = new CustomTable();
@@ -47,6 +47,7 @@ public class CartItems extends JPanel {
                     var quantity = cartResultSet.getString("quantity");
                     model.addRow(new Object[] { cartID, productResultSet.getString("product_name"),
                             productResultSet.getString("price"), quantity, cartResultSet.getString("is_active") });
+
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

@@ -4,22 +4,23 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import custom.CustomButton;
-import custom.CustomInputField;
-import custom.CustomLabel;
-import custom.CustomPasswordField;
+import custom_components.CustomButton;
+import custom_components.CustomCardButton;
+import custom_components.CustomInputField;
+import custom_components.CustomSignUpLabel;
+import custom_components.CustomPasswordField;
 
-public class LoginPage {
-
-    public static void main(String[] args) {
-        var frame = new JFrame("Online Shopping");
+public class LoginPage extends JFrame {
+    public LoginPage() {
         var panel = new JPanel();
         var userNameField = new CustomInputField();
         var passwordField = new CustomPasswordField();
-        var userNameLabel = new CustomLabel("  Enter Username: ");
-        var passwordLabel = new CustomLabel("󰌾  Enter Password");
-        var button = new CustomButton("󰍂  Login");
-        button.setBackground(new Color(143, 196, 212));
+        var userNameLabel = new CustomSignUpLabel("  Enter Username: ");
+        var passwordLabel = new CustomSignUpLabel("󰌾  Enter Password");
+        var dontHaveAccountLabel = new CustomSignUpLabel("Don't Have Account");
+        var loginButton = new CustomButton("󰍂  Login");
+        var toSignUpButton = new CustomCardButton(" Sign Up");
+        loginButton.setBackground(new Color(143, 196, 212));
         panel.setLayout(new GridBagLayout());
         var gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -37,28 +38,44 @@ public class LoginPage {
         gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 0, 0, 0);
-        panel.add(button, gbc);
-        frame.add(panel);
-        panel.setBackground(new Color(19, 126, 217));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        button.addActionListener(new ActionListener() {
+        panel.add(loginButton, gbc);
+        gbc.gridy = 5;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        panel.add(dontHaveAccountLabel, gbc);
+        gbc.gridy = 6;
+        panel.add(toSignUpButton, gbc);
+        add(panel);
+        panel.setBackground(new Color(1, 73, 124));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 600);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userName = userNameField.getText();
                 String password = passwordField.getText();
                 var authenticated = Authenticator.authenticate(userName, password);
                 if (authenticated) {
-                    JOptionPane.showMessageDialog(frame, "Login Successful");
-                    frame.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "Login Successful");
+                    setVisible(false);
                     new MainFrame("Online Shopping", userName);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Login Failed");
+                    JOptionPane.showMessageDialog(null, "Login Failed");
                 }
             }
         });
+        toSignUpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new SignupPage();
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        new LoginPage();
     }
 
 }

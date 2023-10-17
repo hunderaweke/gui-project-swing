@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.sql.*;
 
 public class Authenticator {
-    protected static boolean authenticate(String userName, String password) {
+    public static boolean authenticate(String userName, String password) {
         try {
             var connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;";
             var con = DriverManager.getConnection(connectionUrl);

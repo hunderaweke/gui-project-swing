@@ -2,8 +2,9 @@ package pages;
 
 import javax.swing.*;
 
-import custom.SideBarButton;
-import custom.CustomHeader;
+import custom_components.CustomHeader;
+import custom_components.CustomLabel;
+import custom_components.SideBarButton;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,25 +15,31 @@ public class MainFrame extends JFrame {
     JPanel sidePanel = new JPanel();
     JPanel mainPanel = new JPanel();
     JPanel navigationPanel = new JPanel();
+    public String userName;
 
     MainFrame(String title, String userName) {
-        super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout(0, 0));
+        this.userName = userName;
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(0, 0));
         navigationPanelContent();
-        sidePanelContent(userName);
+        sidePanelContent(this.userName);
         mainPanel.setBackground(Color.WHITE);
-        this.add(new JScrollPane(mainPanel), BorderLayout.CENTER);
-        this.pack();
-        this.setVisible(true);
-        this.setSize(screenSize.width, screenSize.height);
+        add(new JScrollPane(mainPanel), BorderLayout.CENTER);
+        pack();
+        setVisible(true);
+        setSize(screenSize.width, screenSize.height);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     void navigationPanelContent() {
-        var heading = new CustomHeader("Online Shopping  ");
+        var heading = new CustomHeader("<html><h1 style='font-size:70rem;'>Online Shopping   </h1></html>");
         heading.setForeground(new Color(255, 255, 255));
         navigationPanel.setBackground(new Color(1, 73, 124));
-        navigationPanel.add(heading);
+        navigationPanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height / 6));
+        navigationPanel.setLayout(new GridBagLayout());
+        var gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 40, 0, 0);
+        navigationPanel.add(heading, gbc);
         this.add(navigationPanel, BorderLayout.PAGE_START);
     }
 
@@ -45,19 +52,28 @@ public class MainFrame extends JFrame {
                 "󰄐  Cart");
         var paymentButton = new SideBarButton(
                 "  Payment");
+        var shopIcon = new CustomHeader.BigHeaders("  ");
+        shopIcon.setForeground(new Color(255, 255, 255));
 
+        var groupMember = new JPanel();
+        groupMember.setBackground(new Color(1, 73, 124));
+
+        var groupMember1 = new CustomLabel("Hundera Awoke");
+        var groupMember2 = new CustomLabel("Daniel Merga");
+        var groupMember3 = new CustomLabel("Kidus Hailu");
+        var groupMember4 = new CustomLabel("Hermela Girma");
+        var groupMember5 = new CustomLabel("Yididiya Tesfaye");
+        var groupMember6 = new CustomLabel("Lelo Mohammed");
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         cartButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         paymentButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
-        sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 5));
+        sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         var productPage = new ProductsPage();
-        new UserProfile();
-        var userProfile = UserProfile.getUserData(userName);
-        mainPanel.add(new UserProfilePage(userProfile));
-        // add hover effect for the buttons
+        // var userProfile = pages.UserProfile.getUserData(this.userName);
+        mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,10 +101,27 @@ public class MainFrame extends JFrame {
                 mainPanel.setVisible(true);
             }
         });
+        paymentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.removeAll();
+                mainPanel.setVisible(false);
+                mainPanel.add(new PaymentPanel(), BorderLayout.CENTER);
+                mainPanel.setVisible(true);
+            }
+        });
         sidePanel.add(userProfileButton);
         sidePanel.add(productsButton);
         sidePanel.add(cartButton);
         sidePanel.add(paymentButton);
+        sidePanel.add(shopIcon);
+        groupMember.add(groupMember1);
+        groupMember.add(groupMember2);
+        groupMember.add(groupMember3);
+        groupMember.add(groupMember4);
+        groupMember.add(groupMember5);
+        groupMember.add(groupMember6);
+        sidePanel.add(groupMember);
         this.add(sidePanel, BorderLayout.LINE_START);
     }
 
