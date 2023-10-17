@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import custom.CustomButton;
+import custom.CustomCardButton;
 import custom.CustomTable;
 
 import java.awt.*;
@@ -24,10 +25,10 @@ public class CartItems extends JPanel {
             cartTable.setPreferredSize(new Dimension(1000, 900));
             var model = new DefaultTableModel();
             model.setColumnIdentifiers(new Object[] { "Item", "Product", "Price", "Quantity", "State" });
-            removeItemButton = new CustomButton("󰵩  Remove Item");
+            removeItemButton = new CustomCardButton("󰵩  Remove Item");
             removeItemButton.setForeground(Color.WHITE);
 
-            orderItemButton = new CustomButton("󱗪  Order Item");
+            orderItemButton = new CustomCardButton("󱗪  Order Item");
             orderItemButton.setForeground(Color.WHITE);
             orderItemButton.setBackground(new Color(19, 126, 217));
 
