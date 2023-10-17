@@ -18,9 +18,14 @@ public class Authenticator {
                 var md = MessageDigest.getInstance("SHA-256");
                 md.update(password.getBytes());
                 byte[] hashedPassword = md.digest();
+                System.out.println(hashedPassword);
+                System.out.println(passwordFromDB);
+
                 if (MessageDigest.isEqual(hashedPassword, passwordFromDB)) {
+                    System.out.println("Matched");
                     return true;
                 } else {
+                    System.out.println("Not Matched");
                     return false;
                 }
             } catch (Exception e) {
