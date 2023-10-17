@@ -1,11 +1,14 @@
 package pages;
 
 import javax.swing.*;
+
+import custom.CustomLabel;
+
 import java.awt.*;
 
 public class UserProfilePage extends JPanel {
     public UserProfilePage(String[] userData) {
-        var name = new JLabel("<html><h1>" + userData[0] + " " + userData[1] + "</h1></html>");
+        var name = new CustomLabel.UserNameLabel("<html><h1>" + userData[0] + " " + userData[1] + "</h1></html>");
         var email = new JLabel(userData[2]);
         var userName = new JLabel(userData[3]);
         var phoneNumber = new JLabel(userData[userData.length - 1]);
