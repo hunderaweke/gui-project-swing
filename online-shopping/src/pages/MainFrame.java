@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     JPanel sidePanel = new JPanel();
     JPanel mainPanel = new JPanel();
-    JPanel navigationPanel = new JPanel();
+    JPanel headerPanel = new JPanel();
     public String userName;
 
     MainFrame(String title, String userName) {
@@ -33,13 +33,13 @@ public class MainFrame extends JFrame {
     void navigationPanelContent() {
         var heading = new CustomHeader("<html><h1 style='font-size:70rem;'>Online Shopping   </h1></html>");
         heading.setForeground(new Color(255, 255, 255));
-        navigationPanel.setBackground(new Color(1, 73, 124));
-        navigationPanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height / 6));
-        navigationPanel.setLayout(new GridBagLayout());
+        headerPanel.setBackground(new Color(1, 73, 124));
+        headerPanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height / 6));
+        headerPanel.setLayout(new GridBagLayout());
         var gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 40, 0, 0);
-        navigationPanel.add(heading, gbc);
-        this.add(navigationPanel, BorderLayout.PAGE_START);
+        headerPanel.add(heading, gbc);
+        this.add(headerPanel, BorderLayout.PAGE_START);
     }
 
     void sidePanelContent(String userName) {
@@ -64,14 +64,13 @@ public class MainFrame extends JFrame {
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         var productPage = new ProductsPage();
-        // var userProfile = pages.UserProfile.getUserData(this.userName);
         mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.removeAll();
                 mainPanel.setVisible(false);
-                mainPanel.add(new UserProfilePage(UserProfile.getUserData("hundera")));
+                mainPanel.add(new UserProfilePage(UserProfile.getUserData(userName)));
                 mainPanel.setVisible(true);
             }
         });

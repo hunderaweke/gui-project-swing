@@ -88,7 +88,6 @@ public class SignupPage extends JFrame {
                         statement.setString(5, age);
                         statement.setString(6, userName);
                         statement.setString(7, password);
-                        statement.setString(8, confirmPassword);
 
                         int rowsInserted = statement.executeUpdate();
                         if (rowsInserted > 0) {
