@@ -21,6 +21,7 @@ public class CartItems extends JPanel {
             var model = new DefaultTableModel();
             model.setColumnIdentifiers(new Object[] { "Item", "Product", "Price", "Quantity", "State" });
             removeItemButton = new CustomButton("Remove Item");
+            removeItemButton.setForeground(Color.WHITE);
 
             var getCartItemsQuery = "SELECT cart_id, product_id,quantity,is_active FROM Cart_Item;";
             var getProductQuery = "SELECT product_name, price FROM Product WHERE product_id = ?;";
