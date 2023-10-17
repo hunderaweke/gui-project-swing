@@ -1,6 +1,7 @@
 package pages;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import custom.CustomButtonHoverEffect;
 import custom.CustomHeader;
@@ -38,20 +39,21 @@ public class SignupPage extends JFrame {
         contentPane.setLayout(new GridBagLayout());
 
         JLabel headerLabel = new CustomHeader("Online Shopping");
-        headerLabel.setForeground(Color.WHITE); // Set white text color
-        var firstNameLabel = new CustomLabel("First name");
+        headerLabel.setForeground(Color.WHITE);
+        var firstNameLabel = new CustomLabel("First name:");
         firstNameField = new CustomInputField();
         firstNameField.setPreferredSize(new Dimension(250, 30));
-        var lastNameLabel = new CustomLabel("Last name");
+        var lastNameLabel = new CustomLabel("Last name:");
         lastNameField = new CustomInputField();
         lastNameField.setPreferredSize(new Dimension(250, 30));
 
-        var phoneLabel = new CustomLabel("Phone Number");
+        var phoneLabel = new CustomLabel("Phone Number:");
         phoneNumberField = new CustomInputField();
-        phoneNumberField.setPreferredSize(new Dimension(250, 30));
-        var ageLabel = new CustomLabel("Age");
+        phoneNumberField.setPreferredSize(new Dimension(200, 30));
+
+        var ageLabel = new CustomLabel("Age:");
         ageField = new CustomInputField();
-        ageField.setPreferredSize(new Dimension(250, 30));
+        ageField.setPreferredSize(new Dimension(100, 30));
 
         CustomLabel usernameLabel = new CustomLabel("Username:");
         usernameField = new CustomInputField();
@@ -107,7 +109,7 @@ public class SignupPage extends JFrame {
         signupButton.addMouseListener(new CustomButtonHoverEffect());
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Add padding
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -121,12 +123,12 @@ public class SignupPage extends JFrame {
         gbc.gridy = 1;
         contentPane.add(firstNameField, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridx = 2;
+        gbc.gridy = 1;
         contentPane.add(lastNameLabel, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridx = 3;
+        gbc.gridy = 1;
         contentPane.add(lastNameField, gbc);
 
         gbc.gridx = 0;
@@ -137,12 +139,12 @@ public class SignupPage extends JFrame {
         gbc.gridy = 3;
         contentPane.add(phoneNumberField, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridx = 2;
+        gbc.gridy = 3;
         contentPane.add(ageLabel, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridx = 3;
+        gbc.gridy = 3;
         contentPane.add(ageField, gbc);
 
         gbc.gridx = 0;
