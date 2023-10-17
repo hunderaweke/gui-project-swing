@@ -2,7 +2,7 @@ package pages;
 
 import javax.swing.*;
 
-import custom.CustomLabel;
+import custom_components.CustomLabel;
 
 import java.awt.*;
 

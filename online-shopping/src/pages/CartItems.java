@@ -3,9 +3,9 @@ package pages;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import custom.CustomButton;
-import custom.CustomCardButton;
-import custom.CustomTable;
+import custom_components.CustomButton;
+import custom_components.CustomCardButton;
+import custom_components.CustomTable;
 
 import java.awt.*;
 import java.sql.*;

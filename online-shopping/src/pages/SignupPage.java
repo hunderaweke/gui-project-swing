@@ -3,12 +3,12 @@ package pages;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import custom.CustomButtonHoverEffect;
-import custom.CustomHeader;
-import custom.CustomInputField;
-import custom.CustomLabel;
-import custom.CustomPasswordField;
-import custom.SideBarButton;
+import custom_components.CustomButtonHoverEffect;
+import custom_components.CustomHeader;
+import custom_components.CustomInputField;
+import custom_components.CustomLabel;
+import custom_components.CustomPasswordField;
+import custom_components.SideBarButton;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

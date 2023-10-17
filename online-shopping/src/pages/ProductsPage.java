@@ -4,9 +4,9 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import custom.CustomButton;
-import custom.CustomCardButton;
-import custom.CustomProductPageLabel;
+import custom_components.CustomButton;
+import custom_components.CustomCardButton;
+import custom_components.CustomProductPageLabel;
 
 import java.awt.*;
 import java.awt.event.*;
