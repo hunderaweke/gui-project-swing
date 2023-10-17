@@ -51,9 +51,9 @@ public class MainFrame extends JFrame {
                 "󰄐  Cart");
         var paymentButton = new SideBarButton(
                 "  Payment");
-        var shopIcon = new CustomHeader.BigHeaders("  ");
+        var shopIcon = new CustomHeader.BigHeaders(" ");
         shopIcon.setForeground(new Color(255, 255, 255));
-        var aboutUsButton = new SideBarButton("About Us");
+        var aboutUsButton = new SideBarButton("  About Us");
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
