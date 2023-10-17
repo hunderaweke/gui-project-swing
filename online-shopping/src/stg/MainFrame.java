@@ -29,6 +29,7 @@ public class MainFrame extends JFrame {
 
     void navigationPanelContent() {
         var heading = new CustomHeader("Online Shopping");
+        heading.setForeground(new Color(19, 126, 217));
         navigationPanel.add(heading);
         navigationPanel.setBackground(Color.WHITE);
         this.add(navigationPanel, BorderLayout.PAGE_START);
