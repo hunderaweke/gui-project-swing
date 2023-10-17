@@ -4,13 +4,11 @@ import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 
-public class CustomPasswordField extends JPasswordField {
-  public CustomPasswordField() {
-    setPreferredSize(new Dimension(200, 30));
-    setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-    setBackground(new Color(192, 192, 192));
-    setForeground(Color.black);
-    addMouseListener(new CusomTextFieldHoverEffect());
+public class CustomButton extends JButton {
+  public CustomButton(String text) {
+    super(text);
+    setForeground(Color.BLACK);
+    addMouseListener(new CustomButtonHoverEffect());
     try {
       Font font;
       InputStream fontStream = new FileInputStream("src/fonts/Supreme-Regular.otf");
