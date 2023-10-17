@@ -3,6 +3,9 @@ package pages;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import custom.CustomButton;
+import custom.CustomTable;
+
 import java.awt.*;
 import java.sql.*;
 
@@ -14,26 +17,27 @@ public class CartItems extends JPanel {
         setLayout(new BorderLayout());
         try (Connection con = DriverManager.getConnection(this.connectionUrl)) {
             // make a table for it pls
-            var cartTable = new JTable();
+            var cartTable = new CustomTable();
             var model = new DefaultTableModel();
-            model.setColumnIdentifiers(new Object[] { "Item", "Price", "Quantity" });
+            model.setColumnIdentifiers(new Object[] { "Item", "Product", "Price", "Quantity", "State" });
+            removeItemButton = new CustomButton("Remove Item");
 
-            removeItemButton = new JButton("Remove Item");
-            var getCartItemsQuery = "SELECT cart_id, product_id FROM Cart_Item;";
+            var getCartItemsQuery = "SELECT cart_id, product_id,quantity,is_active FROM Cart_Item;";
             var getProductQuery = "SELECT product_name, price FROM Product WHERE product_id = ?;";
 
             try {
-
                 var statement = con.prepareStatement(getCartItemsQuery);
                 var statement2 = con.prepareStatement(getProductQuery);
                 var cartResultSet = statement.executeQuery();
                 while (cartResultSet.next()) {
-                    String productID = cartResultSet.getString("product_id");
+                    String cartID = cartResultSet.getString("cart_id");
+                    var productID = cartResultSet.getString("product_id");
                     statement2.setString(1, productID);
                     var productResultSet = statement2.executeQuery();
                     productResultSet.next();
-                    model.addRow(new Object[] { productID, productResultSet.getString("product_name"),
-                            productResultSet.getString("price") });
+                    var quantity = cartResultSet.getString("quantity");
+                    model.addRow(new Object[] { cartID, productResultSet.getString("product_name"),
+                            productResultSet.getString("price"), quantity, cartResultSet.getString("is_active") });
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -44,6 +48,7 @@ public class CartItems extends JPanel {
             cartTable.setModel(model);
             add(new JScrollPane(cartTable), BorderLayout.CENTER);
             add(buttonPanel, BorderLayout.SOUTH);
+            removeItemButton.setBackground(new Color(19, 126, 217));
             removeItemButton.addActionListener(e -> {
                 int row = (int) cartTable.getSelectedRow();
                 if (row != -1) {
@@ -63,6 +68,14 @@ public class CartItems extends JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void main(String[] args) {
+        var frame = new JFrame("Online Shopping");
+        frame.setContentPane(new CartItems());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

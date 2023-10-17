@@ -90,4 +90,7 @@ public class MainFrame extends JFrame {
         this.add(sidePanel, BorderLayout.LINE_START);
     }
 
+    public static void main(String[] args) {
+        new MainFrame("Online Shopping", "hundera");
+    }
 }
