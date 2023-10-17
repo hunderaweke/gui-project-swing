@@ -5,7 +5,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import custom.CustomButton;
-import custom.CustomLabel;
 import custom.CustomProductPageLabel;
 
 import java.awt.*;
