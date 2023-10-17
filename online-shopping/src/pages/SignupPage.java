@@ -1,12 +1,12 @@
 package pages;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import custom_components.CustomButtonHoverEffect;
+import custom_components.CustomCardButton;
 import custom_components.CustomHeader;
 import custom_components.CustomInputField;
-import custom_components.CustomLabel;
+import custom_components.CustomSignUpLabel;
 import custom_components.CustomPasswordField;
 import custom_components.SideBarButton;
 
@@ -32,47 +32,34 @@ public class SignupPage extends JFrame {
     public SignupPage() {
         setTitle("Signup");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(900, 700));
+        setSize(new Dimension(990, 800));
         setLocationRelativeTo(null);
         JPanel contentPane = new JPanel();
-        contentPane.setBackground(new Color(19, 126, 217));
+        contentPane.setBackground(new Color(1, 73, 124));
         add(contentPane);
         contentPane.setLayout(new GridBagLayout());
         JPanel signuPanel = new JPanel();
         signuPanel.setBackground(new Color(19, 126, 217));
-        JLabel headerLabel = new CustomHeader("Online Shopping");
+        JLabel headerLabel = new CustomHeader("Online Shopping  ");
         headerLabel.setForeground(Color.WHITE);
-        var firstNameLabel = new CustomLabel("First name:");
+        var firstNameLabel = new CustomSignUpLabel("First name:");
         firstNameField = new CustomInputField();
-        firstNameField.setPreferredSize(new Dimension(250, 30));
-        var lastNameLabel = new CustomLabel("Last name:");
+        var lastNameLabel = new CustomSignUpLabel("Last name:");
         lastNameField = new CustomInputField();
-        lastNameField.setPreferredSize(new Dimension(250, 30));
-
-        var phoneLabel = new CustomLabel("Phone Number:");
+        var alreadyHaveAccount = new CustomSignUpLabel("Already Have an Account");
+        var toLoginButton = new CustomCardButton("󰍂  Login");
+        var phoneLabel = new CustomSignUpLabel("Phone Number:");
         phoneNumberField = new CustomInputField();
-        phoneNumberField.setPreferredSize(new Dimension(250, 30));
-
-        var ageLabel = new CustomLabel("Age:");
+        var ageLabel = new CustomSignUpLabel("Age:");
         ageField = new CustomInputField();
-        ageField.setPreferredSize(new Dimension(250, 30));
-
-        CustomLabel usernameLabel = new CustomLabel("Username:");
+        CustomSignUpLabel usernameLabel = new CustomSignUpLabel("Username:");
         usernameField = new CustomInputField();
-        usernameField.setPreferredSize(new Dimension(250, 30));
-
-        CustomLabel emailLabel = new CustomLabel("Email:");
+        CustomSignUpLabel emailLabel = new CustomSignUpLabel("Email:");
         emailField = new CustomInputField();
-        emailField.setPreferredSize(new Dimension(250, 30));
-
-        CustomLabel passwordLabel = new CustomLabel("Password:");
+        CustomSignUpLabel passwordLabel = new CustomSignUpLabel("Password:");
         passwordField = new CustomPasswordField();
-        passwordField.setPreferredSize(new Dimension(250, 30));
-
-        CustomLabel confirmPasswordLabel = new CustomLabel("Confirm Password:");
+        CustomSignUpLabel confirmPasswordLabel = new CustomSignUpLabel("Confirm Password:");
         confirmPasswordField = new CustomPasswordField();
-        confirmPasswordField.setPreferredSize(new Dimension(250, 30));
-
         signupButton = new SideBarButton("  Signup");
         signupButton.setFont(signupButton.getFont().deriveFont(Font.BOLD, 18));
         signupButton.setPreferredSize(new Dimension(250, 40));
@@ -87,8 +74,7 @@ public class SignupPage extends JFrame {
                 String lastName = lastNameField.getText();
                 String phoneNumber = phoneNumberField.getText();
                 String confirmPassword = new String(confirmPasswordField.getPassword());
-                setVisible(false);
-                new MainFrame("Online Shopping", userName);
+
                 // Establish database connection
                 try (Connection connection = DriverManager.getConnection(
                         "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;")) {
@@ -108,10 +94,19 @@ public class SignupPage extends JFrame {
                         if (rowsInserted > 0) {
                             JOptionPane.showMessageDialog(null, "Signup successful!");
                         }
+                        setVisible(false);
+                        new MainFrame("Online Shopping", userName);
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+        toLoginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new LoginPage();
             }
         });
         GridBagConstraints gbc = new GridBagConstraints();
@@ -119,7 +114,7 @@ public class SignupPage extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         signupButton.addMouseListener(new CustomButtonHoverEffect());
         signuPanel.setLayout(new GridBagLayout());
-        signuPanel.setBackground(new Color(19, 126, 217));
+        signuPanel.setBackground(new Color(1, 73, 124));
         gbc.gridx = 0;
         gbc.gridy = 0;
         signuPanel.add(firstNameLabel, gbc);
@@ -164,10 +159,24 @@ public class SignupPage extends JFrame {
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 4, 0, 10);
         gbc.gridwidth = 2;
         signuPanel.add(signupButton, gbc);
-        gbc.fill = GridBagConstraints.CENTER;
 
+        gbc.gridx = 0;
+        gbc.gridy += 1;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.WEST;
+        signuPanel.add(alreadyHaveAccount, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy += 1;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.WEST;
+        signuPanel.add(toLoginButton, gbc);
+        gbc.fill = GridBagConstraints.CENTER;
         gbc.gridx = 0;
         gbc.gridy = 0;
 
@@ -185,6 +194,6 @@ public class SignupPage extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(SignupPage::new);
+        new SignupPage();
     }
 }

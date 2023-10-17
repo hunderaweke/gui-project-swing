@@ -30,8 +30,6 @@ public class ProductsPage extends JPanel {
                 int height = icon.getIconHeight();
                 imageLabel.setPreferredSize(new Dimension(100, height));
                 var productButton = new CustomCardButton("󰄒  Add to Cart");
-                productButton.setForeground(Color.WHITE);
-                productButton.setBackground(new Color(19, 126, 217));
                 productButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

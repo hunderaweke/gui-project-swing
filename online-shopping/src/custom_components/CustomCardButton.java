@@ -8,8 +8,9 @@ import javax.swing.JButton;
 public class CustomCardButton extends JButton {
     public CustomCardButton(String text) {
         super(text);
-        setForeground(Color.BLACK);
+        setForeground(Color.WHITE);
         addMouseListener(new CustomCardButtonHoverEffect());
+        setBackground(new Color(19, 126, 217));
         try {
             Font font;
             InputStream fontStream = new FileInputStream("src/fonts/VictorMonoNerdFont-Bold.ttf");
@@ -19,10 +20,8 @@ public class CustomCardButton extends JButton {
             fontStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the IOException appropriately
         } catch (FontFormatException e) {
             e.printStackTrace();
-            // Handle the FontFormatException appropriately
         }
     }
 }

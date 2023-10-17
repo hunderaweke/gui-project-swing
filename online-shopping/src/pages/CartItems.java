@@ -18,7 +18,7 @@ public class CartItems extends JPanel {
 
     public CartItems() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 250));
+        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 400));
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
             // make a table for it pls
             var cartTable = new CustomTable();

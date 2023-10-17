@@ -18,15 +18,16 @@ public class MainFrame extends JFrame {
 
     MainFrame(String title, String userName) {
         super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout(0, 0));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(0, 0));
         navigationPanelContent();
         sidePanelContent(userName);
         mainPanel.setBackground(Color.WHITE);
-        this.add(new JScrollPane(mainPanel), BorderLayout.CENTER);
-        this.pack();
-        this.setVisible(true);
-        this.setSize(screenSize.width, screenSize.height);
+        add(new JScrollPane(mainPanel), BorderLayout.CENTER);
+        pack();
+        setVisible(true);
+        setSize(screenSize.width, screenSize.height);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     void navigationPanelContent() {
@@ -98,6 +99,15 @@ public class MainFrame extends JFrame {
                 mainPanel.removeAll();
                 mainPanel.setVisible(false);
                 mainPanel.add(new CartItems(), BorderLayout.CENTER);
+                mainPanel.setVisible(true);
+            }
+        });
+        paymentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.removeAll();
+                mainPanel.setVisible(false);
+                mainPanel.add(new PaymentPanel(), BorderLayout.CENTER);
                 mainPanel.setVisible(true);
             }
         });

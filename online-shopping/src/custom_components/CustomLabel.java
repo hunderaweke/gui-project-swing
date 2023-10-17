@@ -18,10 +18,8 @@ public class CustomLabel extends JLabel {
             fontStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the IOException appropriately
         } catch (FontFormatException e) {
             e.printStackTrace();
-            // Handle the FontFormatException appropriately
         }
     }
 
@@ -32,7 +30,7 @@ public class CustomLabel extends JLabel {
             try {
                 Font font;
                 InputStream fontStream = new FileInputStream("src/fonts/Supreme-Regular.otf");
-                font = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(76f);
+                font = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(40f);
                 font = font.deriveFont(Font.BOLD);
                 GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
                 setFont(font);

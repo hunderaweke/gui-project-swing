@@ -20,10 +20,29 @@ public class CustomHeader extends JLabel {
       fontStream.close();
     } catch (IOException e) {
       e.printStackTrace();
-      // Handle the IOException appropriately
     } catch (FontFormatException e) {
       e.printStackTrace();
-      // Handle the FontFormatException appropriately
+    }
+  }
+
+  public static class BigHeaders extends JLabel {
+    public BigHeaders(String text) {
+      super(text);
+      try {
+        Font font;
+        InputStream fontStream = new FileInputStream("src/fonts/ClashGroteskNerdFont-Bold.otf");
+        font = Font.createFont(Font.TRUETYPE_FONT, fontStream);
+        GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
+        font = font.deriveFont(200f);
+        setFont(font);
+        fontStream.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+        // Handle the IOException appropriately
+      } catch (FontFormatException e) {
+        e.printStackTrace();
+        // Handle the FontFormatException appropriately
+      }
     }
   }
 }

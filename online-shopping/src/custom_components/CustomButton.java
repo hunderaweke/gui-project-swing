@@ -21,10 +21,8 @@ public class CustomButton extends JButton {
       fontStream.close();
     } catch (IOException e) {
       e.printStackTrace();
-      // Handle the IOException appropriately
     } catch (FontFormatException e) {
       e.printStackTrace();
-      // Handle the FontFormatException appropriately
     }
   }
 }
