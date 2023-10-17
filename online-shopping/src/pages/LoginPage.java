@@ -16,9 +16,9 @@ public class LoginPage {
         var panel = new JPanel();
         var userNameField = new CustomInputField();
         var passwordField = new CustomPasswordField();
-        var userNameLabel = new CustomLabel("Enter Username: ");
-        var passwordLabel = new CustomLabel("Enter Password");
-        var button = new CustomButton("Login");
+        var userNameLabel = new CustomLabel("  Enter Username: ");
+        var passwordLabel = new CustomLabel("󰌾  Enter Password");
+        var button = new CustomButton("󰍂  Login");
         button.setBackground(new Color(143, 196, 212));
         panel.setLayout(new GridBagLayout());
         var gbc = new GridBagConstraints();

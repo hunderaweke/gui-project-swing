@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
     }
 
     void navigationPanelContent() {
-        var heading = new CustomHeader("Online Shopping");
+        var heading = new CustomHeader("Online Shopping  ");
         heading.setForeground(new Color(19, 126, 217));
         navigationPanel.add(heading);
         navigationPanel.setBackground(Color.WHITE);
@@ -38,11 +38,11 @@ public class MainFrame extends JFrame {
 
     void sidePanelContent(String userName) {
         var userProfileButton = new SideBarButton(
-                "User Profile");
+                "  User Profile");
         var productsButton = new SideBarButton(
-                "Products");
+                "󰒚  Products");
         var cartButton = new SideBarButton(
-                "Cart");
+                "󰄐  Cart");
         var PaymentPanel = new SideBarButton(
                 "payment panal");
 

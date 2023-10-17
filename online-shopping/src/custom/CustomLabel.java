@@ -10,7 +10,7 @@ public class CustomLabel extends JLabel {
         setForeground(Color.BLACK);
         try {
             Font font;
-            InputStream fontStream = new FileInputStream("src/fonts/Supreme-Regular.otf");
+            InputStream fontStream = new FileInputStream("src/fonts/VictorMonoNerdFont-Bold.ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(16f);
             font = font.deriveFont(Font.BOLD);
             setFont(font);

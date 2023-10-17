@@ -1,8 +1,11 @@
 package custom;
 
 import java.awt.*;
-import java.io.*;
-import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.swing.JButton;
 
 public class CustomButton extends JButton {
   public CustomButton(String text) {
@@ -11,7 +14,7 @@ public class CustomButton extends JButton {
     addMouseListener(new CustomButtonHoverEffect());
     try {
       Font font;
-      InputStream fontStream = new FileInputStream("src/fonts/Supreme-Regular.otf");
+      InputStream fontStream = new FileInputStream("src/fonts/VictorMonoNerdFont-Bold.ttf");
       font = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(16f);
       font = font.deriveFont(Font.BOLD);
       setFont(font);

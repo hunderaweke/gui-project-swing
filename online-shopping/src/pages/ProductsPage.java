@@ -30,7 +30,7 @@ public class ProductsPage extends JPanel {
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();
                 imageLabel.setPreferredSize(new Dimension(100, height));
-                var productButton = new CustomButton("Add to Cart");
+                var productButton = new CustomButton("󰄒  Add to Cart");
                 productButton.setForeground(Color.WHITE);
                 productButton.setBackground(new Color(19, 126, 217));
                 productButton.addActionListener(new ActionListener() {

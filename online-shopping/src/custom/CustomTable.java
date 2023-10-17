@@ -15,7 +15,7 @@ public class CustomTable extends JTable {
             header.setFont(font.deriveFont(18f));
             header.setBackground(new Color(19, 126, 217));
             header.setForeground(Color.WHITE);
-            
+
             setFont(font.deriveFont(14f));
             setRowHeight(20);
             fontStream.close();
