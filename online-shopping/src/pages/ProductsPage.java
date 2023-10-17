@@ -12,7 +12,7 @@ public class ProductsPage extends JPanel {
     ProductsPage() {
         // Database connection code
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
-        this.setPreferredSize(new Dimension(1280, 800));
+        this.setPreferredSize(new Dimension(1210, 800));
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
@@ -66,10 +66,10 @@ public class ProductsPage extends JPanel {
                 priceLabel.setPreferredSize(new Dimension(280, 60));
                 secondaryPanel.setBackground(Color.WHITE);
                 productCard.setBorder(new EmptyBorder(0, 10, 0, 10));
-                nameLabel.setBorder(new EmptyBorder(0, 7, 0, 7));
-                descriptionLabel.setBorder(new EmptyBorder(0, 7, 0, 7));
+                nameLabel.setBorder(new EmptyBorder(0, 13, 0, 13));
+                descriptionLabel.setBorder(new EmptyBorder(0, 13, 0, 13));
 
-                priceLabel.setBorder(new EmptyBorder(0, 7, 0, 7));
+                priceLabel.setBorder(new EmptyBorder(0, 13, 0, 13));
 
                 secondaryPanel.add(nameLabel);
                 secondaryPanel.add(descriptionLabel);
