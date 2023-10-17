@@ -12,7 +12,7 @@ public class ProductsPage extends JPanel {
     ProductsPage() {
         // Database connection code
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
-        this.setPreferredSize(new Dimension(1250, 800));
+        this.setPreferredSize(new Dimension(1280, 800));
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
