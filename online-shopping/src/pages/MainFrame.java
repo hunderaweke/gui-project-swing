@@ -2,6 +2,7 @@ package pages;
 
 import javax.swing.*;
 
+import custom.SideBarButton;
 import custom.CustomHeader;
 
 import java.awt.*;
@@ -36,13 +37,13 @@ public class MainFrame extends JFrame {
     }
 
     void sidePanelContent(String userName) {
-        var userProfileButton = new Buttons(
+        var userProfileButton = new SideBarButton(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>User Profile</h2></html>");
-        var productsButton = new Buttons(
+        var productsButton = new SideBarButton(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Products</h2></html>");
-        var cartButton = new Buttons(
+        var cartButton = new SideBarButton(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>Cart</h2></html>");
-        var PaymentPanel = new Buttons(
+        var PaymentPanel = new SideBarButton(
                 "<html><h2 style='color: rgb(225, 225, 225); font-weight: bold;'>payment panal</h2></html>");
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));

@@ -1,4 +1,4 @@
-package pages;
+package custom;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -6,8 +6,8 @@ import javax.swing.event.ChangeListener;
 
 import java.awt.*;
 
-public class Buttons extends JButton {
-    public Buttons(String text) {
+public class SideBarButton extends CustomButton {
+    public SideBarButton(String text) {
         super(text);
         this.setBackground(new Color(143, 196, 212));
         this.setForeground(Color.BLACK);
