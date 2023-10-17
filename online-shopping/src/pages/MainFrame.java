@@ -30,9 +30,9 @@ public class MainFrame extends JFrame {
 
     void navigationPanelContent() {
         var heading = new CustomHeader("Online Shopping  ");
-        heading.setForeground(new Color(19, 126, 217));
+        heading.setForeground(new Color(255, 255, 255));
+        navigationPanel.setBackground(new Color(1, 73, 124));
         navigationPanel.add(heading);
-        navigationPanel.setBackground(Color.WHITE);
         this.add(navigationPanel, BorderLayout.PAGE_START);
     }
 
@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
                 "󰒚  Products");
         var cartButton = new SideBarButton(
                 "󰄐  Cart");
-        var PaymentPanel = new SideBarButton(
+        var paymentButton = new SideBarButton(
                 "payment panal");
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));

@@ -7,6 +7,5 @@ public class SideBarButton extends CustomButton {
         super(text);
         setBackground(new Color(143, 196, 212));
         setForeground(Color.WHITE);
-
     }
 }
