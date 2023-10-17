@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
         navigationPanelContent();
         sidePanelContent(userName);
         mainPanel.setBackground(Color.WHITE);
-        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(new JScrollPane(mainPanel), BorderLayout.CENTER);
         this.pack();
         this.setVisible(true);
         this.setSize(screenSize.width, screenSize.height);
@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 mainPanel.removeAll();
                 mainPanel.setVisible(false);
-                mainPanel.add(productPage);
+                mainPanel.add(new JScrollPane(productPage));
                 mainPanel.setVisible(true);
             }
         });

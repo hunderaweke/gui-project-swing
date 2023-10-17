@@ -16,16 +16,15 @@ public class ProductsPage extends JPanel {
     ProductsPage() {
         // Database connection code
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
-        this.setPreferredSize(new Dimension(1210, 800));
+        this.setPreferredSize(new Dimension(1210, 1600));
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Product");
-            this.setLayout(new GridLayout(0, 4, 20, 0));
-            int n = 4;
+            this.setLayout(new GridLayout(0, 4, 10, 0));
+            int n = 7;
             while (n > 0 && rs.next()) {
                 var productCard = new JPanel(new GridLayout(3, 2, 4, 2));
-
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();
@@ -54,7 +53,7 @@ public class ProductsPage extends JPanel {
                 var descriptionLabel = new CustomProductPageLabel.DescriptionLabel(
                         "<html><p style='font-size: 12px; font-weight: light;'>" + rs.getString("product_description")
                                 + "</p></html>");
-                descriptionLabel.setPreferredSize(new Dimension(280, 50));
+                descriptionLabel.setPreferredSize(new Dimension(280, 60));
                 nameLabel.setPreferredSize(new Dimension(280, 50));
                 priceLabel.setPreferredSize(new Dimension(280, 60));
                 secondaryPanel.setBackground(Color.WHITE);
