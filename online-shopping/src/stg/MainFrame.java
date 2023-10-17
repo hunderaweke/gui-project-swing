@@ -1,5 +1,8 @@
 package stg;
+
 import javax.swing.*;
+
+import custom.CustomHeader;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,8 +28,7 @@ public class MainFrame extends JFrame {
     }
 
     void navigationPanelContent() {
-        var heading = new JLabel(
-                "<html><h1 style='font-size:50px; color: rgb(19, 126, 217); font-weight: bold;'>Online Shopping</h1></html>");
+        var heading = new CustomHeader("Online Shopping");
         navigationPanel.add(heading);
         navigationPanel.setBackground(Color.WHITE);
         this.add(navigationPanel, BorderLayout.PAGE_START);

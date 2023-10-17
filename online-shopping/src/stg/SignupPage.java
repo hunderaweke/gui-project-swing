@@ -3,6 +3,7 @@ package stg;
 import javax.swing.*;
 
 import custom.CustomButtonHoverEffect;
+import custom.CustomHeader;
 import custom.CustomInputField;
 import custom.CustomLabel;
 import custom.CustomPasswordField;
@@ -35,8 +36,7 @@ public class SignupPage extends JFrame {
         add(contentPane);
         contentPane.setLayout(new GridBagLayout());
 
-        JLabel headerLabel = new JLabel("Online Shopping");
-        headerLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 42));
+        JLabel headerLabel = new CustomHeader("Online Shopping");
         headerLabel.setForeground(Color.WHITE); // Set white text color
         var firstNameLabel = new CustomLabel("First name");
         firstNameField = new CustomInputField();
