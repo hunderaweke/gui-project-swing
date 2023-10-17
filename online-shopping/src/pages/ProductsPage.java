@@ -4,6 +4,10 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import custom.CustomButton;
+import custom.CustomLabel;
+import custom.CustomProductPageLabel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -26,7 +30,9 @@ public class ProductsPage extends JPanel {
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();
                 imageLabel.setPreferredSize(new Dimension(100, height));
-                var productButton = new JButton("Add to Cart");
+                var productButton = new CustomButton("Add to Cart");
+                productButton.setForeground(Color.WHITE);
+                productButton.setBackground(new Color(19, 126, 217));
                 productButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -39,26 +45,13 @@ public class ProductsPage extends JPanel {
                     }
                 });
 
-                productButton.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        productButton.setBackground(new Color(19, 126, 217));
-                        productButton.setForeground(Color.WHITE);
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        productButton.setBackground(UIManager.getColor("Button.background"));
-                        productButton.setForeground(UIManager.getColor("Button.foreground"));
-                    }
-                });
-
                 var secondaryPanel = new JPanel();
-                var nameLabel = new JLabel("<html><h2>" + rs.getString("product_name") + "</h2></html>");
-                var priceLabel = new JLabel(
-                        "<html><h1 style='font-size: 20px; color: rgb(19, 126, 217); font-weight: bold;'>"
-                                + rs.getString("price") + "</h1></html>");
-                var descriptionLabel = new JLabel(
+                var nameLabel = new CustomProductPageLabel.NameLabel(
+                        "<html><h2 style='font-size: 14px; font-weight: bold;'>" + rs.getString("product_name")
+                                + "</h2></html>");
+                var priceLabel = new CustomProductPageLabel.PriceLabel(
+                        rs.getString("price"));
+                var descriptionLabel = new CustomProductPageLabel.DescriptionLabel(
                         "<html><p style='font-size: 12px; font-weight: light;'>" + rs.getString("product_description")
                                 + "</p></html>");
                 descriptionLabel.setPreferredSize(new Dimension(280, 50));
