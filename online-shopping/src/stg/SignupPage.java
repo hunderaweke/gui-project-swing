@@ -2,28 +2,27 @@ package stg;
 
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
-
-import stg.LoginPage.ButtonHoverEffect;
+import custom.CustomButtonHoverEffect;
+import custom.CustomInputField;
+import custom.CustomLabel;
+import custom.CustomPasswordField;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.EventObject;
 
 public class SignupPage extends JFrame {
-    public JTextField usernameField;
-    public JTextField firstNameField;
-    public JTextField lastNameField;
-    public JTextField phoneNumberField;
-    public JTextField ageField;
-    public JTextField emailField;
-    public JPasswordField passwordField;
+    public CustomInputField usernameField;
+    public CustomInputField firstNameField;
+    public CustomInputField lastNameField;
+    public CustomInputField phoneNumberField;
+    public CustomInputField ageField;
+    public CustomInputField emailField;
+    public CustomPasswordField passwordField;
     public JButton signupButton;
 
     public SignupPage() {
@@ -39,43 +38,31 @@ public class SignupPage extends JFrame {
         JLabel headerLabel = new JLabel("Online Shopping");
         headerLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 42));
         headerLabel.setForeground(Color.WHITE); // Set white text color
-        var firstNameLabel  = new JLabel("First name");
-        firstNameField = new JTextField(20);
+        var firstNameLabel = new CustomLabel("First name");
+        firstNameField = new CustomInputField();
         firstNameField.setPreferredSize(new Dimension(250, 30));
-        var lastNameLabel  = new JLabel("Last name");
-        lastNameField = new JTextField(20);
+        var lastNameLabel = new CustomLabel("Last name");
+        lastNameField = new CustomInputField();
         lastNameField.setPreferredSize(new Dimension(250, 30));
 
-        var phoneLabel =  new JLabel("Phone Number");
-        phoneNumberField = new JTextField(20);
+        var phoneLabel = new CustomLabel("Phone Number");
+        phoneNumberField = new CustomInputField();
         phoneNumberField.setPreferredSize(new Dimension(250, 30));
-        var ageLabel =  new JLabel("Age");
-        ageField = new JTextField(10);
+        var ageLabel = new CustomLabel("Age");
+        ageField = new CustomInputField();
         ageField.setPreferredSize(new Dimension(250, 30));
 
-        JLabel usernameLabel = new JLabel("Username:");
-        usernameField = new JTextField(20);
+        CustomLabel usernameLabel = new CustomLabel("Username:");
+        usernameField = new CustomInputField();
         usernameField.setPreferredSize(new Dimension(250, 30));
-      
 
-        JLabel emailLabel = new JLabel("Email:");
-        emailField = new JTextField(20);
+        CustomLabel emailLabel = new CustomLabel("Email:");
+        emailField = new CustomInputField();
         emailField.setPreferredSize(new Dimension(250, 30));
 
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordField = new JPasswordField(20);
+        CustomLabel passwordLabel = new CustomLabel("Password:");
+        passwordField = new CustomPasswordField();
         passwordField.setPreferredSize(new Dimension(250, 30));
-
-        
-        
-        firstNameLabel.setFont(firstNameLabel.getFont().deriveFont(Font.BOLD, 18)); 
-        lastNameLabel.setFont(lastNameLabel.getFont().deriveFont(Font.BOLD, 18)); 
-        phoneLabel.setFont(phoneLabel.getFont().deriveFont(Font.BOLD, 18)); 
-        ageLabel.setFont(ageLabel.getFont().deriveFont(Font.BOLD, 18)); 
-        usernameLabel.setFont(usernameLabel.getFont().deriveFont(Font.BOLD, 18)); 
-        emailLabel.setFont(emailLabel.getFont().deriveFont(Font.BOLD, 18));
-        passwordLabel.setFont(passwordLabel.getFont().deriveFont(Font.BOLD, 18));
-
 
         signupButton = new JButton("Signup");
         signupButton.setBackground(new Color(143, 196, 212));
@@ -106,7 +93,6 @@ public class SignupPage extends JFrame {
                         statement.setString(6, username);
                         statement.setString(7, password);
 
-
                         // Execute the SQL statement
                         int rowsInserted = statement.executeUpdate();
                         if (rowsInserted > 0) {
@@ -119,24 +105,7 @@ public class SignupPage extends JFrame {
             }
         });
 
-        signupButton.addMouseListener(new ButtonHoverEffect());
-         class ButtonHoverEffect extends MouseAdapter {
-        private Color originalBackground;
-
-        
-        public void mouseEntered(MouseEvent e) {
-            JButton button = (JButton) ((EventObject) e).getSource();
-            originalBackground = button.getBackground();
-            button.setBackground(new Color(205, 234, 226));
-        }
-
-    
-        public void mouseExited(MouseEvent e) {
-            JButton button = (JButton) ((EventObject) e).getSource();
-            button.setBackground(originalBackground);
-        }
-    }
-
+        signupButton.addMouseListener(new CustomButtonHoverEffect());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Add padding
@@ -155,61 +124,61 @@ public class SignupPage extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-               contentPane.add(lastNameLabel, gbc);
-       
-               gbc.gridx = 1;
-               gbc.gridy = 2;
-               contentPane.add(lastNameField, gbc);
-       
-               gbc.gridx = 0;
-               gbc.gridy = 3;
-               contentPane.add(phoneLabel, gbc);
-       
-               gbc.gridx = 1;
-               gbc.gridy = 3;
-               contentPane.add(phoneNumberField, gbc);
-       
-               gbc.gridx = 0;
-               gbc.gridy = 4;
-               contentPane.add(ageLabel, gbc);
-       
-               gbc.gridx = 1;
-               gbc.gridy = 4;
-               contentPane.add(ageField, gbc);
-       
-               gbc.gridx = 0;
-               gbc.gridy = 5;
-               contentPane.add(usernameLabel, gbc);
-       
-               gbc.gridx = 1;
-               gbc.gridy = 5;
-               contentPane.add(usernameField, gbc);
-       
-               gbc.gridx = 0;
-               gbc.gridy = 6;
-               contentPane.add(emailLabel, gbc);
-       
-               gbc.gridx = 1;
-               gbc.gridy = 6;
-               contentPane.add(emailField, gbc);
-       
-               gbc.gridx = 0;
-               gbc.gridy = 7;
-               contentPane.add(passwordLabel, gbc);
-       
-               gbc.gridx = 1;
-               gbc.gridy = 7;
-               contentPane.add(passwordField, gbc);
-       
-               gbc.gridx = 0;
-               gbc.gridy = 8;
-               gbc.gridwidth = 2;
-               contentPane.add(signupButton, gbc);
-       
-               setVisible(true);
-           }
-       
-           public static void main(String[] args) {
-               SwingUtilities.invokeLater(SignupPage::new);
-           }
-       }
+        contentPane.add(lastNameLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        contentPane.add(lastNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        contentPane.add(phoneLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        contentPane.add(phoneNumberField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        contentPane.add(ageLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        contentPane.add(ageField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        contentPane.add(usernameLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        contentPane.add(usernameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        contentPane.add(emailLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        contentPane.add(emailField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        contentPane.add(passwordLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 7;
+        contentPane.add(passwordField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 2;
+        contentPane.add(signupButton, gbc);
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(SignupPage::new);
+    }
+}
