@@ -11,6 +11,7 @@ import java.sql.*;
 
 public class CartItems extends JPanel {
     private JButton removeItemButton;
+    private JButton orderItemButton;
     String connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -25,6 +26,10 @@ public class CartItems extends JPanel {
             model.setColumnIdentifiers(new Object[] { "Item", "Product", "Price", "Quantity", "State" });
             removeItemButton = new CustomButton("󰵩 Remove Item");
             removeItemButton.setForeground(Color.WHITE);
+
+            orderItemButton = new CustomButton("󱗪  Order Item");
+            orderItemButton.setForeground(Color.WHITE);
+            orderItemButton.setBackground(new Color(19, 126, 217));
 
             var getCartItemsQuery = "SELECT cart_id, product_id,quantity,is_active FROM Cart_Item;";
             var getProductQuery = "SELECT product_name, price FROM Product WHERE product_id = ?;";
@@ -49,11 +54,29 @@ public class CartItems extends JPanel {
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new FlowLayout());
             buttonPanel.add(removeItemButton);
+            buttonPanel.add(orderItemButton);
             cartTable.setModel(model);
             add(new JScrollPane(cartTable), BorderLayout.CENTER);
             add(buttonPanel, BorderLayout.SOUTH);
             removeItemButton.setBackground(new Color(19, 126, 217));
             removeItemButton.addActionListener(e -> {
+                int row = (int) cartTable.getSelectedRow();
+                if (row != -1) {
+                    // Get product id from selected row
+                    var productId = Integer.parseInt((String) cartTable.getValueAt(row, 0));
+                    try {
+                        Connection conn = DriverManager.getConnection(this.connectionUrl);
+                        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Cart_Item WHERE product_id = ?");
+                        stmt.setInt(1, productId);
+                        stmt.executeUpdate();
+                        model.removeRow(row);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+
+            orderItemButton.addActionListener(e -> {
                 int row = (int) cartTable.getSelectedRow();
                 if (row != -1) {
                     // Get product id from selected row
