@@ -3,7 +3,6 @@ package pages;
 import javax.swing.*;
 
 import custom_components.CustomHeader;
-import custom_components.CustomLabel;
 import custom_components.SideBarButton;
 
 import java.awt.*;
@@ -54,20 +53,13 @@ public class MainFrame extends JFrame {
                 "  Payment");
         var shopIcon = new CustomHeader.BigHeaders("  ");
         shopIcon.setForeground(new Color(255, 255, 255));
+        var aboutUsButton = new SideBarButton("About Us");
 
-        var groupMember = new JPanel();
-        groupMember.setBackground(new Color(1, 73, 124));
-
-        var groupMember1 = new CustomLabel("Hundera Awoke");
-        var groupMember2 = new CustomLabel("Daniel Merga");
-        var groupMember3 = new CustomLabel("Kidus Hailu");
-        var groupMember4 = new CustomLabel("Hermela Girma");
-        var groupMember5 = new CustomLabel("Yididiya Tesfaye");
-        var groupMember6 = new CustomLabel("Lelo Mohammed");
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         cartButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         paymentButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
+        aboutUsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -110,18 +102,21 @@ public class MainFrame extends JFrame {
                 mainPanel.setVisible(true);
             }
         });
+        aboutUsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.removeAll();
+                mainPanel.setVisible(false);
+                mainPanel.add(new AboutUsPage());
+                mainPanel.setVisible(true);
+            }
+        });
         sidePanel.add(userProfileButton);
         sidePanel.add(productsButton);
         sidePanel.add(cartButton);
         sidePanel.add(paymentButton);
+        sidePanel.add(aboutUsButton);
         sidePanel.add(shopIcon);
-        groupMember.add(groupMember1);
-        groupMember.add(groupMember2);
-        groupMember.add(groupMember3);
-        groupMember.add(groupMember4);
-        groupMember.add(groupMember5);
-        groupMember.add(groupMember6);
-        sidePanel.add(groupMember);
         this.add(sidePanel, BorderLayout.LINE_START);
     }
 
