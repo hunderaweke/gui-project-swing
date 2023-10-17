@@ -24,7 +24,7 @@ public class CartItems extends JPanel {
             cartTable.setPreferredSize(new Dimension(1000, 900));
             var model = new DefaultTableModel();
             model.setColumnIdentifiers(new Object[] { "Item", "Product", "Price", "Quantity", "State" });
-            removeItemButton = new CustomButton("󰵩 Remove Item");
+            removeItemButton = new CustomButton("󰵩  Remove Item");
             removeItemButton.setForeground(Color.WHITE);
 
             orderItemButton = new CustomButton("󱗪  Order Item");

@@ -54,7 +54,7 @@ public class PaymentPanel extends JPanel {
         JFrame frame = new JFrame("Payment Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
-        frame.setLocationRelativeTo(null); // Center the frame on the screen
+        frame.setLocationRelativeTo(null);
 
         PaymentPanel paymentPanel = new PaymentPanel();
         frame.add(paymentPanel);

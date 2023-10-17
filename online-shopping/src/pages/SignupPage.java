@@ -7,6 +7,7 @@ import custom.CustomHeader;
 import custom.CustomInputField;
 import custom.CustomLabel;
 import custom.CustomPasswordField;
+import custom.SideBarButton;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,11 +65,9 @@ public class SignupPage extends JFrame {
         passwordField = new CustomPasswordField();
         passwordField.setPreferredSize(new Dimension(250, 30));
 
-        signupButton = new JButton("Signup");
-        signupButton.setBackground(new Color(143, 196, 212));
-        signupButton.setForeground(Color.BLACK);
+        signupButton = new SideBarButton("  Signup");
         signupButton.setFont(signupButton.getFont().deriveFont(Font.BOLD, 18));
-        signupButton.setPreferredSize(new Dimension(100, 40));
+        signupButton.setPreferredSize(new Dimension(150, 40));
         signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

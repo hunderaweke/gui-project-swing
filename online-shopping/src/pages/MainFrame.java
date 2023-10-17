@@ -43,12 +43,14 @@ public class MainFrame extends JFrame {
                 "󰒚  Products");
         var cartButton = new SideBarButton(
                 "󰄐  Cart");
-        var PaymentPanel = new SideBarButton(
-                "payment panal");
+        var paymentButton = new SideBarButton(
+                "  Payment");
+       
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         cartButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
+        paymentButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 5));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -87,6 +89,7 @@ public class MainFrame extends JFrame {
         sidePanel.add(userProfileButton);
         sidePanel.add(productsButton);
         sidePanel.add(cartButton);
+        sidePanel.add(paymentButton);
         this.add(sidePanel, BorderLayout.LINE_START);
     }
 
