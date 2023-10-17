@@ -1,30 +1,35 @@
 package pages;
 
 import javax.swing.*;
+
+import custom.CustomButton;
+import custom.CustomInputField;
+import custom.CustomLabel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PaymentPanel extends JPanel {
-    private JTextField amountTextField;
-    private JTextField balanceTextField;
-    private JTextField priceTextField;
-    private JButton payButton;
+    private CustomInputField amountTextField;
+    private CustomInputField balanceTextField;
+    private CustomInputField priceTextField;
+    private CustomButton payButton;
 
     public PaymentPanel() {
         setLayout(new GridLayout(4, 2, 10, 10));
 
-        JLabel amountLabel = new JLabel("Amount to Pay:");
-        amountTextField = new JTextField(10);
+        JLabel amountLabel = new CustomLabel("Amount to Pay:");
+        amountTextField = new CustomInputField();
 
-        JLabel balanceLabel = new JLabel("Balance:");
-        balanceTextField = new JTextField(10);
+        JLabel balanceLabel = new CustomLabel("Balance:");
+        balanceTextField = new CustomInputField();
         balanceTextField.setEditable(false);
 
-        JLabel priceLabel = new JLabel("Price:");
-        priceTextField = new JTextField(10);
+        JLabel priceLabel = new CustomLabel("Price:");
+        priceTextField = new CustomInputField();
 
-        payButton = new JButton("Pay");
+        payButton = new CustomButton("Pay");
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
