@@ -1,4 +1,4 @@
-package stg;
+package pages;
 
 public class Payment {
 

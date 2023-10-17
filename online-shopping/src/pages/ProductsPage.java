@@ -1,4 +1,4 @@
-package stg;
+package pages;
 
 import java.sql.*;
 import javax.swing.*;
