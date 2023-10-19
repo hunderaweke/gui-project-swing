@@ -6,12 +6,14 @@ import javax.swing.border.EmptyBorder;
 
 import custom_components.CustomCardButton;
 import custom_components.CustomProductPageLabel;
+import pages.ModifyAmountDialog.ModifyAmountListener;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 
 public class ProductsPage extends JPanel {
+
     ProductsPage() {
         // Database connection code
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
@@ -32,9 +34,21 @@ public class ProductsPage extends JPanel {
                 productButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Add the product to the cart
                         try {
-                            addToCart(rs.getInt("product_id"), url);
+                            int quantity = 0;
+                            ModifyAmountDialog dialog = new ModifyAmountDialog(null, quantity);
+                            dialog.setModifyAmountListener(new ModifyAmountListener() {
+                                @Override
+                                public void onAmountModified(int modifiedAmount) {
+                                    System.out.println(modifiedAmount);
+                                }
+                            });
+                            dialog.setVisible(true);
+                            if (quantity <= 0) {
+                                //
+                            } else {
+                                addToCart(rs.getInt("product_id"), url, quantity);
+                            }
                         } catch (SQLException exception) {
                             exception.printStackTrace();
                         }
@@ -75,17 +89,14 @@ public class ProductsPage extends JPanel {
         }
     }
 
-    public static void addToCart(int productId, String url) {
+    public static void addToCart(int productId, String url, int quantity) {
         try {
-            // Create database connection
             Connection conn = DriverManager.getConnection(url);
-
-            // Call stored procedure to add product to cart
             CallableStatement stmt = conn.prepareCall("{CALL AddCartItem(?, ?, ?, ?, ?)}");
             stmt.setInt(1, 1);
             stmt.setInt(2, productId);
             stmt.setInt(3, 1);
-            stmt.setInt(4, 1);
+            stmt.setInt(4, quantity);
             stmt.setInt(5, 1);
 
             stmt.executeUpdate();
