@@ -3,16 +3,6 @@
 CREATE DATABASE Online_Shopping;
 --CREATE TABLE
 
-CREATE TABLE Customer(
- customer_id INT IDENTITY(1,1) PRIMARY KEY,
- username VARCHAR(200) UNIQUE NOT NULL,
- first_name VARCHAR(200) NOT NULL,
- last_name VARCHAR(200)NOT NULL,
- age INT NOT NULL,
- email VARCHAR(255) UNIQUE NOT NULL,
- customer_password VARBINARY(64) NOT NULL,-- varbinary is used for storing hashed passwords because passwords are typically represented as binary data after being hashed.
- phone_number VARCHAR(50) NOT NULL
- );
 
  CREATE TABLE customer_Address(
  address_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -56,7 +46,8 @@ VALUES (10000, 1),
        (6000, 6),
        (7000, 7),
        (800000, 8),
-       (900000, 9);
+       (900000, 9),
+       (1000000,31);
 
  CREATE TABLE Cart(
  cart_id INT IDENTITY(1,1) PRIMARY KEY,
