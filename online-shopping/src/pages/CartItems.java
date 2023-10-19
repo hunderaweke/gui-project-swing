@@ -20,7 +20,6 @@ public class CartItems extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 400));
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
-            // make a table for it pls
             var cartTable = new CustomTable();
             cartTable.setPreferredSize(new Dimension(1000, 900));
             var model = new DefaultTableModel();
@@ -83,7 +82,6 @@ public class CartItems extends JPanel {
                     System.out.println("No element selected");
                 } else {
                     for (int row : rows) {
-                        System.out.println(row);
                         var productId = Integer.parseInt((String) cartTable.getValueAt(row, 1));
                         try {
                             Connection conn = DriverManager.getConnection(this.connectionUrl);
