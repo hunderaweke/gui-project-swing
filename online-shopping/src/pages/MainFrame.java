@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        var customer_id = getCustomerId(userName);
+        int customer_id = getCustomerId(userName);
         var productPage = new ProductsPage(customer_id);
         mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {

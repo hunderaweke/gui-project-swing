@@ -48,7 +48,7 @@ public class ProductsPage extends JPanel {
                                 //
                             } else {
                                 int productId = Integer.parseInt((String) productButton.getClientProperty("productId"));
-                                addToCart(productId, url, modifiedAmount, customer_id);
+                                addToCart(productId, url, modifiedAmountstring);
                             }
                         } catch (Exception exception) {
                             exception.printStackTrace();

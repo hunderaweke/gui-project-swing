@@ -44,22 +44,17 @@ public class AdminMainFrame extends JFrame {
 
     void sidePanelContent(String userName) {
         var userProfileButton = new SideBarButton(
-                "  User Profile");
+                "  Admin Profile");
         var productsButton = new SideBarButton(
                 "󰒚  Products");
         var cartButton = new SideBarButton(
                 "󰄐  Cart");
-        var paymentButton = new SideBarButton(
-                "  Payment");
         var shopIcon = new CustomHeader.BigHeaders(" ");
         shopIcon.setForeground(new Color(255, 255, 255));
-        var aboutUsButton = new SideBarButton("  About Us");
 
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         cartButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
-        paymentButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
-        aboutUsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -92,32 +87,12 @@ public class AdminMainFrame extends JFrame {
                 mainPanel.setVisible(true);
             }
         });
-        paymentButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainPanel.removeAll();
-                mainPanel.setVisible(false);
-                mainPanel.add(new PaymentPanel(), BorderLayout.CENTER);
-                mainPanel.setVisible(true);
-            }
-        });
-        aboutUsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainPanel.removeAll();
-                mainPanel.setVisible(false);
-                mainPanel.add(new AboutUsPage());
-                mainPanel.setVisible(true);
-            }
-        });
-        sidePanel.add(userProfileButton);
-        sidePanel.add(productsButton);
-        sidePanel.add(cartButton);
-        sidePanel.add(paymentButton);
-        sidePanel.add(aboutUsButton);
-        sidePanel.add(shopIcon);
-        this.add(sidePanel, BorderLayout.LINE_START);
+
     }
+
+    });
+
+    sidePanel.add(userProfileButton);sidePanel.add(productsButton);sidePanel.add(cartButton);sidePanel.add(paymentButton);sidePanel.add(aboutUsButton);sidePanel.add(shopIcon);this.add(sidePanel,BorderLayout.LINE_START);}
 
     public static void main(String[] args) {
         new AdminMainFrame("Online Shopping", "hundera");
