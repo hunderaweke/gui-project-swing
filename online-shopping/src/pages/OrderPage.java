@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
+import custom_components.CustomCardButton;
 import custom_components.CustomInputField;
 import custom_components.CustomLabel;
 import custom_components.CustomSignUpLabel;
@@ -14,7 +15,7 @@ public class OrderPage extends JDialog {
     private ArrayList<ArrayList<String>> orderData;
     private int priceSum = 0;
     private CustomInputField totalPriceLabel;
-    
+
     public OrderPage(ArrayList<ArrayList<String>> orderData) {
         this.orderData = orderData;
         getContentPane().setBackground(new Color(1, 73, 124));
@@ -45,7 +46,7 @@ public class OrderPage extends JDialog {
         totalPriceLabel.setBounds(150, 50, 150, 30);
         add(totalPriceLabel);
 
-        JButton orderButton = new JButton("Order");
+        CustomCardButton orderButton = new CustomCardButton("Order");
         orderButton.setBounds(10, 90, 80, 30);
         orderButton.addActionListener(new ActionListener() {
             @Override
@@ -54,7 +55,6 @@ public class OrderPage extends JDialog {
             }
         });
         add(orderButton);
-
         setSize(new Dimension(500, 200));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -64,4 +64,5 @@ public class OrderPage extends JDialog {
         JOptionPane.showMessageDialog(null, "Order placed successfully");
         dispose();
     }
+
 }
