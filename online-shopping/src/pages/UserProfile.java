@@ -13,14 +13,15 @@ public class UserProfile {
             statement.setString(1, userName);
             var resultSet = statement.executeQuery();
             resultSet.next();
-            var userData = new String[] { resultSet.getString("first_name"), resultSet.getString("last_name"),
-                    resultSet.getString("email"), resultSet.getString("phone_number") };
+
             var userId = resultSet.getString("customer_id");
             var balanceStmnt = con.prepareStatement(getuserBalanceQuery);
             balanceStmnt.setString(1, "31");
             var balanceSet = balanceStmnt.executeQuery();
             balanceSet.next();
-            System.out.println(balanceSet.getString("AMOUNT"));
+            var userData = new String[] { resultSet.getString("first_name"), resultSet.getString("last_name"),
+                    resultSet.getString("username"),
+                    resultSet.getString("email"), resultSet.getString("phone_number"), balanceSet.getString("AMOUNT") };
             return userData;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -63,7 +63,7 @@ public class AdminMainFrame extends JFrame {
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        var productPage = new ProductsPage();
+        var productPage = new ProductsPage("admin");
         mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {
             @Override
