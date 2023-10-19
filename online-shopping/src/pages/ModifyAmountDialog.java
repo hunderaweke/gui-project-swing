@@ -1,11 +1,9 @@
 package pages;
 
 import javax.swing.*;
-
 import custom_components.CustomCardButton;
 import custom_components.CustomInputField;
 import custom_components.CustomSignUpLabel;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +17,6 @@ public class ModifyAmountDialog extends JDialog {
 
     public ModifyAmountDialog(Frame owner, int currentAmount) {
         super(owner, "Modify Amount", true);
-
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setBackground(new Color(1, 73, 124));
@@ -39,10 +36,8 @@ public class ModifyAmountDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    modifiedAmount = Integer.parseInt(amountTextField.getText());
-                    if (listener != null) {
-                        listener.onAmountModified(modifiedAmount);
-                    }
+                    int modifiedAmount = Integer.parseInt(amountTextField.getText());
+                    ModifyAmountDialog.this.modifiedAmount = modifiedAmount;
                     dispose(); // Close the dialog
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(ModifyAmountDialog.this, "Invalid amount", "Error",
@@ -75,11 +70,25 @@ public class ModifyAmountDialog extends JDialog {
         setResizable(false);
     }
 
+    public int getModifiedAmount() {
+        return modifiedAmount;
+    }
+
     public void setModifyAmountListener(ModifyAmountListener listener) {
         this.listener = listener;
     }
 
     public interface ModifyAmountListener {
         void onAmountModified(int modifiedAmount);
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (!visible) {
+            if (listener != null) {
+                listener.onAmountModified(modifiedAmount);
+            }
+        }
     }
 }

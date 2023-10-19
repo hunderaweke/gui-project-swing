@@ -13,9 +13,7 @@ import java.awt.event.*;
 import java.net.URL;
 
 public class ProductsPage extends JPanel {
-
-    ProductsPage() {
-        // Database connection code
+    ProductsPage(int customer_id) {
         String url = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
         this.setPreferredSize(new Dimension(1210, 1600));
         try {
@@ -31,11 +29,12 @@ public class ProductsPage extends JPanel {
                 int height = icon.getIconHeight();
                 imageLabel.setPreferredSize(new Dimension(100, height));
                 var productButton = new CustomCardButton("󰄒  Add to Cart");
+                productButton.putClientProperty("productId", rs.getString("product_id"));
                 productButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            int quantity = 0;
+                            int quantity = 1;
                             ModifyAmountDialog dialog = new ModifyAmountDialog(null, quantity);
                             dialog.setModifyAmountListener(new ModifyAmountListener() {
                                 @Override
@@ -44,12 +43,14 @@ public class ProductsPage extends JPanel {
                                 }
                             });
                             dialog.setVisible(true);
+                            int modifiedAmount = dialog.getModifiedAmount();
                             if (quantity <= 0) {
                                 //
                             } else {
-                                addToCart(rs.getInt("product_id"), url, quantity);
+                                int productId = Integer.parseInt((String) productButton.getClientProperty("productId"));
+                                addToCart(productId, url, modifiedAmount, customer_id);
                             }
-                        } catch (SQLException exception) {
+                        } catch (Exception exception) {
                             exception.printStackTrace();
                         }
                     }
@@ -89,16 +90,15 @@ public class ProductsPage extends JPanel {
         }
     }
 
-    public static void addToCart(int productId, String url, int quantity) {
+    public static void addToCart(int productId, String url, int quantity, int customer_id) {
         try {
             Connection conn = DriverManager.getConnection(url);
             CallableStatement stmt = conn.prepareCall("{CALL AddCartItem(?, ?, ?, ?, ?)}");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, customer_id);
             stmt.setInt(2, productId);
             stmt.setInt(3, 1);
             stmt.setInt(4, quantity);
             stmt.setInt(5, 1);
-
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class ProductsPage extends JPanel {
 
     public static void main(String[] args) {
         var frame = new JFrame("Online Shopping");
-        frame.setContentPane(new ProductsPage());
+        frame.setContentPane(new ProductsPage(31));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
