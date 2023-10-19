@@ -7,6 +7,7 @@ import custom_components.CustomCardButton;
 import custom_components.CustomTable;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class CartItems extends JPanel {
@@ -45,7 +46,7 @@ public class CartItems extends JPanel {
                     var productResultSet = statement2.executeQuery();
                     productResultSet.next();
                     var quantity = cartResultSet.getString("quantity");
-                    model.addRow(new Object[] { cartID, productResultSet.getString("product_name"),
+                    model.addRow(new Object[] { cartID, productID, productResultSet.getString("product_name"),
                             productResultSet.getString("price"), quantity, cartResultSet.getString("is_active") });
 
                 }
@@ -63,7 +64,6 @@ public class CartItems extends JPanel {
             removeItemButton.addActionListener(e -> {
                 int row = (int) cartTable.getSelectedRow();
                 if (row != -1) {
-                    // Get product id from selected row
                     var productId = Integer.parseInt((String) cartTable.getValueAt(row, 0));
                     try {
                         Connection conn = DriverManager.getConnection(this.connectionUrl);
@@ -78,18 +78,30 @@ public class CartItems extends JPanel {
             });
 
             orderItemButton.addActionListener(e -> {
-                int row = (int) cartTable.getSelectedRow();
-                if (row != -1) {
-                    // Get product id from selected row
-                    var productId = Integer.parseInt((String) cartTable.getValueAt(row, 0));
-                    try {
-                        Connection conn = DriverManager.getConnection(this.connectionUrl);
-                        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Cart_Item WHERE product_id = ?");
-                        stmt.setInt(1, productId);
-                        stmt.executeUpdate();
-                        model.removeRow(row);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
+                int[] rows = cartTable.getSelectedRows();
+                if (rows.length == 0) {
+                    System.out.println("No element selected");
+                } else {
+                    for (int row : rows) {
+                        System.out.println(row);
+                        var productId = Integer.parseInt((String) cartTable.getValueAt(row, 1));
+                        try {
+                            Connection conn = DriverManager.getConnection(this.connectionUrl);
+                            PreparedStatement stmt = conn.prepareStatement(
+                                    "Select product_name,price, catagory_id FROM Product WHERE product_id=?");
+                            stmt.setInt(1, productId);
+                            var productResultSet = stmt.executeQuery();
+                            productResultSet.next();
+                            var productName = productResultSet.getString("product_name");
+                            var price = productResultSet.getString("price");
+                            var catagoryId = productResultSet.getString("catagory_id");
+                            stmt.close();
+                            String[][] orderData;
+                            orderData = new String[][] { { productName, price, catagoryId } };
+                            var orderPage = new OrderPage(orderData);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             });

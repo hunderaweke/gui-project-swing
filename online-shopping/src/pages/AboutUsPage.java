@@ -10,7 +10,7 @@ import custom_components.CustomLabel;
 public class AboutUsPage extends JPanel {
 
     public AboutUsPage() {
-        var groupHeading = new CustomLabel("Name                ID");
+        var groupHeading = new CustomLabel("Name                   ID");
         var groupMember1 = new CustomLabel("Hundera Awoke            UGR/25358/14");
         var groupMember2 = new CustomLabel("Daniel Merga             UGR/25699/14");
         var groupMember3 = new CustomLabel("Kidus Hailu              UGR/25309/14");
