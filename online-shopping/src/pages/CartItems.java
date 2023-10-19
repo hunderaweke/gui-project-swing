@@ -18,7 +18,7 @@ public class CartItems extends JPanel {
 
     public CartItems() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 400));
+        setPreferredSize(new Dimension(screenSize.width - 330, screenSize.height - 230));
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
             var cartTable = new CustomTable();
             cartTable.setPreferredSize(new Dimension(1000, 900));
@@ -103,7 +103,10 @@ public class CartItems extends JPanel {
                     }
                 }
             });
-        } catch (SQLException e) {
+
+        } catch (
+
+        SQLException e) {
             e.printStackTrace();
         }
     }

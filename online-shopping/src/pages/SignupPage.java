@@ -68,14 +68,86 @@ public class SignupPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String userName = usernameField.getText();
                 String email = emailField.getText();
-                String password = new String(passwordField.getPassword());
                 String age = ageField.getText();
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phoneNumber = phoneNumberField.getText();
+                String password = new String(passwordField.getPassword());
                 String confirmPassword = new String(confirmPasswordField.getPassword());
 
-                // Establish database connection
+                if (password.length() <= 8) {
+                    JOptionPane.showMessageDialog(null, "Password must be greater than 8 characters.");
+                    return; // Exit the ActionListener
+                }
+
+                if (!password.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match.");
+                    return;
+                }
+                // Custom exception class for invalid email format
+                class InvalidEmailFormatException extends Exception {
+                    public InvalidEmailFormatException(String message) {
+                        super(message);
+                    }
+                }
+
+                // Emmai exception section
+
+                // Phone number exception section
+
+                signupButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // ...
+
+                        // Check if the email contains the "@" symbol
+                        if (!email.contains("@")) {
+                            try {
+                                throw new InvalidEmailFormatException(
+                                        "Invalid email address format. Must contain '@' symbol.");
+                            } catch (InvalidEmailFormatException ex) {
+                                JOptionPane.showMessageDialog(null, ex.getMessage());
+                                return; // Exit the ActionListener
+                            }
+                        }
+
+                        // ...
+
+                        try (Connection connection = DriverManager.getConnection(
+                                "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;")) {
+                            // Prepare SQL statement
+                            String sql = "insert into Customer (first_name, last_name, email, phone_number, age, username, customer_password) values (?, ?, ?, ?, ?, ?,  HASHBYTES('SHA2_256', ?));";
+                            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                                // ...
+
+                                int rowsInserted = statement.executeUpdate();
+                                if (rowsInserted > 0) {
+                                    JOptionPane.showMessageDialog(null, "Signup successful!");
+                                }
+                                setVisible(false);
+                                new MainFrame("Online Shopping", userName);
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+
+                // ...
+                int ageValue;
+                try {
+                    ageValue = Integer.parseInt(age);
+                    if (ageValue <= 18) {
+                        throw new Exception("Age cannot be less thann 18");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Invalid age value.");
+                    return; // Exit the ActionListener
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    return; // Exit the ActionListener
+                }
+
                 try (Connection connection = DriverManager.getConnection(
                         "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;")) {
                     // Prepare SQL statement
