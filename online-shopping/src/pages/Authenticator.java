@@ -32,5 +32,4 @@ public class Authenticator {
         }
         return false;
     }
-
 }

@@ -25,10 +25,8 @@ public class PaymentPanel extends JPanel {
         setBackground(new Color(1, 73, 124));
         JLabel amountLabel = new CustomLabel("Amount to Pay:");
         amountTextField = new CustomInputField();
-
         JLabel priceLabel = new CustomLabel("Price:");
         priceTextField = new CustomInputField();
-
         payButton = new SideBarButton("Pay");
         payButton.setPreferredSize(new Dimension(200, 40));
         payButton.addActionListener(new ActionListener() {

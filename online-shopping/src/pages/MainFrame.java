@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import custom_components.CustomHeader;
 import custom_components.SideBarButton;
-
+import java.sql.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,7 +63,8 @@ public class MainFrame extends JFrame {
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        var productPage = new ProductsPage();
+        var customer_id = getCustomerId(userName);
+        var productPage = new ProductsPage(customer_id);
         mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {
             @Override
@@ -88,7 +89,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 mainPanel.removeAll();
                 mainPanel.setVisible(false);
-                mainPanel.add(new CartItems(), BorderLayout.CENTER);
+                mainPanel.add(new CartItems(userName), BorderLayout.CENTER);
                 mainPanel.setVisible(true);
             }
         });
@@ -117,6 +118,22 @@ public class MainFrame extends JFrame {
         sidePanel.add(aboutUsButton);
         sidePanel.add(shopIcon);
         this.add(sidePanel, BorderLayout.LINE_START);
+    }
+
+    public int getCustomerId(String userName) {
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
+        var getCustomerIdQuery = "SELECT customer_id FROM Customer WHERE username = ?;";
+        try (Connection con = DriverManager.getConnection(connectionUrl)) {
+            var getCustomerIdStatement = con.prepareStatement(getCustomerIdQuery);
+            getCustomerIdStatement.setString(1, userName);
+            var getCustomerIdResultSet = getCustomerIdStatement.executeQuery();
+            getCustomerIdResultSet.next();
+            var customerId = getCustomerIdResultSet.getString("customer_id");
+            return Integer.parseInt(customerId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
