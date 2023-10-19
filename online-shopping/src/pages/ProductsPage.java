@@ -21,7 +21,7 @@ public class ProductsPage extends JPanel {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Product");
             this.setLayout(new GridLayout(0, 4, 10, 0));
-            int n = 7;
+            int n = 8;
             while (n > 0 && rs.next()) {
                 var productCard = new JPanel(new GridLayout(3, 2, 0, 2));
                 Icon icon = new ImageIcon(new URL(rs.getString("image_url")));
