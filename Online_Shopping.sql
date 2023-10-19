@@ -39,6 +39,24 @@ CREATE TABLE Customer(
  quantity int NOT NULL,
 
  );
+-- Create the balance table
+CREATE TABLE balance (
+    AMOUNT INT,
+    customer_id INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id) ON DELETE CASCADE
+);
+
+-- Insert values into the balance table
+INSERT INTO balance (AMOUNT, customer_id)
+VALUES (10000, 1),
+       (20000, 2),
+       (30000, 3),
+       (40000, 4),
+       (50000, 5),
+       (6000, 6),
+       (7000, 7),
+       (800000, 8),
+       (900000, 9);
 
  CREATE TABLE Cart(
  cart_id INT IDENTITY(1,1) PRIMARY KEY,

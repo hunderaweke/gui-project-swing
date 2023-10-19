@@ -18,7 +18,7 @@ public class CartItems extends JPanel {
 
     public CartItems() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(screenSize.width - 400, screenSize.height - 400));
+        setPreferredSize(new Dimension(screenSize.width - 330, screenSize.height - 230));
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
             // make a table for it pls
             var cartTable = new CustomTable();
@@ -78,34 +78,24 @@ public class CartItems extends JPanel {
             });
 
             orderItemButton.addActionListener(e -> {
-                int[] rows = cartTable.getSelectedRows();
-                if (rows.length == 0) {
-                    System.out.println("No element selected");
-                } else {
-                    for (int row : rows) {
-                        System.out.println(row);
-                        var productId = Integer.parseInt((String) cartTable.getValueAt(row, 1));
-                        try {
-                            Connection conn = DriverManager.getConnection(this.connectionUrl);
-                            PreparedStatement stmt = conn.prepareStatement(
-                                    "Select product_name,price, catagory_id FROM Product WHERE product_id=?");
-                            stmt.setInt(1, productId);
-                            var productResultSet = stmt.executeQuery();
-                            productResultSet.next();
-                            var productName = productResultSet.getString("product_name");
-                            var price = productResultSet.getString("price");
-                            var catagoryId = productResultSet.getString("catagory_id");
-                            stmt.close();
-                            String[][] orderData;
-                            orderData = new String[][] { { productName, price, catagoryId } };
-                            var orderPage = new OrderPage(orderData);
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
+                int row = (int) cartTable.getSelectedRow();
+                if (row != -1) {
+                    var productId = Integer.parseInt((String) cartTable.getValueAt(row, 0));
+                    try {
+                        Connection conn = DriverManager.getConnection(this.connectionUrl);
+                        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Cart_Item WHERE product_id = ?");
+                        stmt.setInt(1, productId);
+                        stmt.executeUpdate();
+                        model.removeRow(row);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
                     }
                 }
             });
-        } catch (SQLException e) {
+
+        } catch (
+
+        SQLException e) {
             e.printStackTrace();
         }
     }
