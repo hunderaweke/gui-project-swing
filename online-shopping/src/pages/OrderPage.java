@@ -3,8 +3,13 @@ package pages;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 import custom_components.CustomCardButton;
 import custom_components.CustomInputField;
@@ -75,8 +80,38 @@ public class OrderPage extends JDialog {
     }
 
     private void performOrder() {
-        JOptionPane.showMessageDialog(null, "Order placed successfully");
-        dispose();
-    }
+        try {
+            // Establish a database connection
+            String connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
+            for (ArrayList<String> product : orderData) {
+                var connection = DriverManager.getConnection(connectionUrl);
+                int productId = Integer.parseInt(product.get(0));
+                int quantity = Integer.parseInt(product.get(3));
+                int totalPrice = priceSum;
+                int customerId = Integer.parseInt(product.get(product.size() - 1));
+                Random random = new Random();
+                int randomNumber = random.nextInt(10000000);
+                // Prepare the SQL statement to call the stored procedure
+                String sql = "{CALL InsertOrder(?, ?, ?, ?, ?)}";
+                CallableStatement statement = connection.prepareCall(sql);
 
+                // Set the values for the stored procedure parameters
+                statement.setInt(1, randomNumber);
+                statement.setInt(2, productId);
+                statement.setInt(3, quantity);
+                statement.setInt(4, totalPrice);
+                statement.setInt(5, customerId);
+
+                // Execute the stored procedure
+                statement.execute();
+
+                // Close the statement
+                statement.close();
+            }
+            JOptionPane.showMessageDialog(null, "Order placed successfully");
+            dispose();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error placing the order: " + ex.getMessage());
+        }
+    }
 }

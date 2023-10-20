@@ -20,7 +20,7 @@ public class LoginPage extends JFrame {
         var dontHaveAccountLabel = new CustomSignUpLabel("Don't Have Account");
         var loginButton = new CustomButton("󰍂  Login");
         var toSignUpButton = new CustomCardButton(" Sign Up");
-        var toAdminPage = new CustomCardButton("Admin Page");
+        // var toAdminPage = new CustomCardButton("Admin Page");
         loginButton.setBackground(new Color(143, 196, 212));
         panel.setLayout(new GridBagLayout());
         var gbc = new GridBagConstraints();
@@ -46,7 +46,7 @@ public class LoginPage extends JFrame {
         gbc.gridy = 6;
         panel.add(toSignUpButton, gbc);
         gbc.gridy = 7;
-        panel.add(toAdminPage, gbc);
+        // panel.add(toAdminPage, gbc);
         add(panel);
         panel.setBackground(new Color(1, 73, 124));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,13 +75,13 @@ public class LoginPage extends JFrame {
                 new SignupPage();
             }
         });
-        toAdminPage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new AdminMainFrame("Online Shopping");
-            }
-        });
+        // toAdminPage.addActionListener(new ActionListener() {
+        // @Override
+        // public void actionPerformed(ActionEvent e) {
+        // setVisible(false);
+        // new AdminMainFrame("Online Shopping");
+        // }
+        // });
     }
 
     public static void main(String[] args) {

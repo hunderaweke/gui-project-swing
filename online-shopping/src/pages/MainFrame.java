@@ -49,8 +49,6 @@ public class MainFrame extends JFrame {
                 "󰒚  Products");
         var cartButton = new SideBarButton(
                 "󰄐  Cart");
-        var paymentButton = new SideBarButton(
-                "  Payment");
         var shopIcon = new CustomHeader.BigHeaders(" ");
         shopIcon.setForeground(new Color(255, 255, 255));
         var aboutUsButton = new SideBarButton("  About Us");
@@ -58,13 +56,14 @@ public class MainFrame extends JFrame {
         userProfileButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         productsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         cartButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
-        paymentButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         aboutUsButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         sidePanel.setPreferredSize(new Dimension((screenSize.width / 5) + 10, screenSize.height / 6));
         sidePanel.setBackground(new Color(1, 73, 124));
         sidePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         int customer_id = getCustomerId(userName);
         var productPage = new ProductsPage(customer_id);
+        var orderButton = new SideBarButton("Orders");
+        orderButton.setPreferredSize(new Dimension(screenSize.width / 5, 40));
         mainPanel.add(productPage);
         userProfileButton.addActionListener(new ActionListener() {
             @Override
@@ -93,15 +92,6 @@ public class MainFrame extends JFrame {
                 mainPanel.setVisible(true);
             }
         });
-        paymentButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainPanel.removeAll();
-                mainPanel.setVisible(false);
-                mainPanel.add(new PaymentPanel(), BorderLayout.CENTER);
-                mainPanel.setVisible(true);
-            }
-        });
         aboutUsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,11 +101,20 @@ public class MainFrame extends JFrame {
                 mainPanel.setVisible(true);
             }
         });
+        orderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.removeAll();
+                mainPanel.setVisible(false);
+                mainPanel.add(new OrdersPage(userName));
+                mainPanel.setVisible(true);
+            }
+        });
         sidePanel.add(userProfileButton);
         sidePanel.add(productsButton);
         sidePanel.add(cartButton);
-        sidePanel.add(paymentButton);
         sidePanel.add(aboutUsButton);
+        sidePanel.add(orderButton);
         sidePanel.add(shopIcon);
         this.add(sidePanel, BorderLayout.LINE_START);
     }
