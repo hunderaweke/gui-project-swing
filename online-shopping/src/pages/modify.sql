@@ -15,14 +15,14 @@ DROP TABLE
   Order_product;
 
 
-CREATE PROCEDURE InsertOrderProduct @ payment_id INT,
+CREATE PROCEDURE InsertOrderProduct 
+@ payment_id INT,
 @ product_id INT,
 @ quantity INT,
-@ product_price DECIMAL AS BEGIN
+@ product_price INT AS
+BEGIN
 INSERT INTO
   Order_product (payment_id, product_id, quantity, product_price)
 VALUES
   (@ payment_id, @ product_id, @ quantity, @ product_price);
-
-
 END

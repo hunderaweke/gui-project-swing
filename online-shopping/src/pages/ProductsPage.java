@@ -28,33 +28,6 @@ public class ProductsPage extends JPanel {
                 var imageLabel = new JLabel(icon);
                 int height = icon.getIconHeight();
                 imageLabel.setPreferredSize(new Dimension(100, height));
-                var productButton = new CustomCardButton("󰄒  Add to Cart");
-                productButton.putClientProperty("productId", rs.getString("product_id"));
-                productButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            int quantity = 1;
-                            ModifyAmountDialog dialog = new ModifyAmountDialog(null, quantity);
-                            dialog.setModifyAmountListener(new ModifyAmountListener() {
-                                @Override
-                                public void onAmountModified(int modifiedAmount) {
-                                    System.out.println(modifiedAmount);
-                                }
-                            });
-                            dialog.setVisible(true);
-                            int modifiedAmount = dialog.getModifiedAmount();
-                            if (quantity <= 0) {
-                                //
-                            } else {
-                                int productId = Integer.parseInt((String) productButton.getClientProperty("productId"));
-                                addToCart(productId, url, modifiedAmountstring);
-                            }
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                        }
-                    }
-                });
 
                 var secondaryPanel = new JPanel();
                 var nameLabel = new CustomProductPageLabel.NameLabel(
@@ -78,7 +51,37 @@ public class ProductsPage extends JPanel {
                 secondaryPanel.add(nameLabel);
                 secondaryPanel.add(descriptionLabel);
                 secondaryPanel.add(priceLabel);
-                secondaryPanel.add(productButton);
+                if (customer_id != 49) {
+
+                    var productButton = new CustomCardButton("󰄒  Add to Cart");
+                    productButton.putClientProperty("productId", rs.getString("product_id"));
+                    productButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                int quantity = 1;
+                                ModifyAmountDialog dialog = new ModifyAmountDialog(null, quantity);
+                                dialog.setModifyAmountListener(new ModifyAmountListener() {
+                                    @Override
+                                    public void onAmountModified(int modifiedAmount) {
+                                        System.out.println(modifiedAmount);
+                                    }
+                                });
+                                dialog.setVisible(true);
+                                int modifiedAmount = dialog.getModifiedAmount();
+                                if (quantity <= 0) {
+                                    //
+                                } else {
+                                    int productId = Integer
+                                            .parseInt((String) productButton.getClientProperty("productId"));
+                                    addToCart(productId, url, modifiedAmount, customer_id);
+                                }
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        }
+                    });
+                }
                 productCard.add(imageLabel);
                 productCard.add(secondaryPanel);
 

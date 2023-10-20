@@ -16,7 +16,7 @@ public class CartItems extends JPanel {
     String connectionUrl = "jdbc:sqlserver://localhost:1433;Database=Online_shopping;user=hundera;password=55969362;encrypt=true;trustServerCertificate=true;";
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public CartItems() {
+    public CartItems(String userName) {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(screenSize.width - 330, screenSize.height - 230));
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
@@ -119,9 +119,6 @@ public class CartItems extends JPanel {
         SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public CartItems() {
     }
 
     public static void main(String[] args) {
