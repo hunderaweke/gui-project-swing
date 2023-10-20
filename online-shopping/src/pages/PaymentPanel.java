@@ -2,11 +2,7 @@ package pages;
 
 import javax.swing.*;
 
-import custom_components.CustomButton;
 import custom_components.CustomCardButton;
-import custom_components.CustomInputField;
-import custom_components.CustomLabel;
-import custom_components.SideBarButton;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

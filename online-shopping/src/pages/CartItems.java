@@ -104,6 +104,7 @@ public class CartItems extends JPanel {
                             elements.add(productId);
                             elements.add(productName);
                             elements.add("" + price + "");
+                            elements.add("" + quantity + "");
                             orderData.add(elements);
                         } catch (SQLException ex) {
                             ex.printStackTrace();

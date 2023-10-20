@@ -14,14 +14,22 @@ import custom_components.CustomSignUpLabel;
 public class OrderPage extends JDialog {
     private ArrayList<ArrayList<String>> orderData;
     private int priceSum = 0;
+    private int numberOfProducts = 0;
     private CustomInputField totalPriceLabel;
 
     public OrderPage(ArrayList<ArrayList<String>> orderData) {
         this.orderData = orderData;
         getContentPane().setBackground(new Color(1, 73, 124));
         calculatePriceSum();
+        calculateProducts();
         initComponents();
         setVisible(true);
+    }
+
+    private void calculateProducts() {
+        for (ArrayList<String> product : orderData) {
+            numberOfProducts += Integer.parseInt(product.get(product.size() - 1));
+        }
     }
 
     private void calculatePriceSum() {
@@ -32,7 +40,13 @@ public class OrderPage extends JDialog {
 
     private void initComponents() {
         setLayout(null);
-
+        CustomSignUpLabel noOfProducts = new CustomSignUpLabel("No of products");
+        noOfProducts.setBounds(10, 90, 200, 30);
+        add(noOfProducts);
+        CustomInputField noOfProductsText = new CustomInputField(Integer.toString(numberOfProducts));
+        noOfProductsText.setBounds(150, 90, 150, 30);
+        noOfProductsText.setEditable(false);
+        add(noOfProductsText);
         CustomSignUpLabel title = new CustomSignUpLabel("Order Detail");
         title.setBounds(10, 10, 200, 30);
         add(title);
@@ -47,7 +61,7 @@ public class OrderPage extends JDialog {
         add(totalPriceLabel);
 
         CustomCardButton orderButton = new CustomCardButton("Order");
-        orderButton.setBounds(10, 90, 80, 30);
+        orderButton.setBounds(10, 120, 80, 30);
         orderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +69,7 @@ public class OrderPage extends JDialog {
             }
         });
         add(orderButton);
-        setSize(new Dimension(500, 200));
+        setSize(new Dimension(500, 250));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
